@@ -1,9 +1,10 @@
-import React from "react";
 import { Box, Typography } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
-import { connect } from "react-redux";
+
 import { BadgeAvatar } from "./index";
 import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
+import React from "react";
+import { connect } from "react-redux";
+import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -11,25 +12,25 @@ const useStyles = makeStyles(() => ({
     marginTop: 23,
     marginLeft: 6,
     display: "flex",
-    alignItems: "center"
+    alignItems: "center",
   },
   subContainer: {
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
-    flexGrow: 1
+    flexGrow: 1,
   },
   username: {
     letterSpacing: -0.23,
     fontSize: 16,
     fontWeight: "bold",
-    marginLeft: 17
+    marginLeft: 17,
   },
   ellipsis: {
     color: "#95A7C4",
     marginRight: 24,
-    opacity: 0.5
-  }
+    opacity: 0.5,
+  },
 }));
 
 const CurrentUser = (props) => {
@@ -50,7 +51,7 @@ const CurrentUser = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    user: state.user
+    user: state.user,
   };
 };
 

@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { connect } from "react-redux";
+
 import { Sidebar } from "./index";
-import { searchUsers } from "../../store/utils/thunkCreators";
 import { clearSearchedUsers } from "../../store/conversations";
+import { connect } from "react-redux";
+import { searchUsers } from "../../store/utils/thunkCreators";
 
 const SidebarContainer = (props) => {
   const { searchUsers, clearSearchedUsers } = props;
@@ -35,7 +36,7 @@ const mapDispatchToProps = (dispatch) => {
     },
     clearSearchedUsers: () => {
       dispatch(clearSearchedUsers());
-    }
+    },
   };
 };
 
