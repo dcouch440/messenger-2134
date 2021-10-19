@@ -1,12 +1,13 @@
-import axios from "axios";
-import socket from "../../socket";
 import {
-  gotConversations,
   addConversation,
+  gotConversations,
   setNewMessage,
   setSearchedUsers,
 } from "../conversations";
 import { gotUser, setFetchingStatus } from "../user";
+
+import axios from "axios";
+import socket from "../../socket";
 
 axios.interceptors.request.use(async function (config) {
   const token = await localStorage.getItem("messenger-token");
