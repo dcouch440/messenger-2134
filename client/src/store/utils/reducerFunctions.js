@@ -1,3 +1,5 @@
+import quickSortById from "../../utils/quickSortById";
+
 export const addMessageToStore = (state, payload) => {
   const { message, sender } = payload;
   // if sender isn't null, that means the message needs to be put in a brand new convo
@@ -6,8 +8,8 @@ export const addMessageToStore = (state, payload) => {
       id: message.conversationId,
       otherUser: sender,
       messages: [message],
+      latestMessageText: message.text,
     };
-    newConvo.latestMessageText = message.text;
     return [newConvo, ...state];
   }
 
@@ -16,9 +18,7 @@ export const addMessageToStore = (state, payload) => {
       return {
         ...convo,
         latestMessageText: message.text,
-        // messages are returned from the API in reverse.
-        // storing message in the new array at the first index to keep things consistent.
-        messages: [message, ...convo.messages],
+        messages: [...convo.messages, message],
       };
     } else {
       return convo;
@@ -84,3 +84,23 @@ export const addNewConvoToStore = (state, recipientId, message) => {
     }
   });
 };
+
+export const sortConversation = (state, id) => {
+  return state.map((convo) => {
+    if (convo.id === id) {
+      return {
+        ...convo,
+        messages: quickSortById(convo.messages),
+      };
+    } else {
+      return convo;
+    }
+  });
+};
+
+// previouslyViewed.
+
+export const addConversationId = (state, id) => ({
+  ...state,
+  [id]: true,
+});
