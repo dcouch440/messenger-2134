@@ -129,6 +129,7 @@ export const userViewedConversation =
     const { previouslyViewed } = getState();
     batch(() => {
       dispatch(setActiveChat(username));
+      // if conversation was not previously viewed sort the convo and store that this happened.
       if (!previouslyViewed[id]) {
         dispatch(conversationSorted(id));
         dispatch(conversationViewed(id));
