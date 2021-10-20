@@ -4,7 +4,6 @@ import {
   addOnlineUserToStore,
   addSearchedUsersToStore,
   removeOfflineUserFromStore,
-  sortConversation,
 } from "./utils/reducerFunctions";
 
 // ACTIONS
@@ -16,7 +15,6 @@ const REMOVE_OFFLINE_USER = "REMOVE_OFFLINE_USER";
 const SET_SEARCHED_USERS = "SET_SEARCHED_USERS";
 const CLEAR_SEARCHED_USERS = "CLEAR_SEARCHED_USERS";
 const ADD_CONVERSATION = "ADD_CONVERSATION";
-const SORT_CONVERSATION = "SORT_CONVERSATION";
 
 // ACTION CREATORS
 
@@ -69,13 +67,6 @@ export const addConversation = (recipientId, newMessage) => {
   };
 };
 
-export const conversationSorted = (id) => {
-  return {
-    type: SORT_CONVERSATION,
-    payload: { id },
-  };
-};
-
 // REDUCER
 
 const reducer = (state = [], action) => {
@@ -100,8 +91,6 @@ const reducer = (state = [], action) => {
         action.payload.recipientId,
         action.payload.newMessage
       );
-    case SORT_CONVERSATION:
-      return sortConversation(state, action.payload.id);
     default:
       return state;
   }
