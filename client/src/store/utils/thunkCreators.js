@@ -1,5 +1,6 @@
 import {
   addConversation,
+  conversationSorted,
   gotConversations,
   setNewMessage,
   setSearchedUsers,
@@ -7,6 +8,9 @@ import {
 import { gotUser, setFetchingStatus } from "../user";
 
 import axios from "axios";
+import { batch } from "react-redux";
+import { conversationViewed } from "../previouslyViewed";
+import { setActiveChat } from "../activeConversation";
 import socket from "../../socket";
 
 axios.interceptors.request.use(async function (config) {
@@ -118,3 +122,16 @@ export const searchUsers = (searchTerm) => async (dispatch) => {
     console.error(error);
   }
 };
+
+export const userViewedConversation =
+  ({ username, id }) =>
+  (dispatch, getState) => {
+    const { previouslyViewed } = getState();
+    batch(() => {
+      dispatch(setActiveChat(username));
+      if (!previouslyViewed[id]) {
+        dispatch(conversationSorted(id));
+        dispatch(conversationViewed(id));
+      }
+    });
+  };
