@@ -1,5 +1,3 @@
-import quickSortById from "../../utils/quickSortById";
-
 export const addMessageToStore = (state, payload) => {
   const { message, sender } = payload;
   // if sender isn't null, that means the message needs to be put in a brand new convo
@@ -88,9 +86,12 @@ export const addNewConvoToStore = (state, recipientId, message) => {
 export const sortConversation = (state, id) => {
   return state.map((convo) => {
     if (convo.id === id) {
+      const newMessagesArray = [...convo.messages];
       return {
         ...convo,
-        messages: quickSortById(convo.messages),
+        messages: newMessagesArray.sort((a, b) => {
+          return a.id - b.id;
+        }),
       };
     } else {
       return convo;
