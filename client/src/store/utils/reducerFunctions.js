@@ -82,26 +82,3 @@ export const addNewConvoToStore = (state, recipientId, message) => {
     }
   });
 };
-
-export const sortConversation = (state, id) => {
-  return state.map((convo) => {
-    if (convo.id === id) {
-      const newMessagesArray = [...convo.messages];
-      return {
-        ...convo,
-        messages: newMessagesArray.sort((a, b) => {
-          return a.id - b.id;
-        }),
-      };
-    } else {
-      return convo;
-    }
-  });
-};
-
-// previouslyViewed.
-
-export const addConversationId = (state, id) => ({
-  ...state,
-  [id]: true,
-});
