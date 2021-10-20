@@ -4,7 +4,7 @@ import { Box } from "@material-ui/core";
 import React from "react";
 import { connect } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
-import { setActiveChat } from "../../store/activeConversation";
+import { userViewedConversation } from "../../store/utils/thunkCreators";
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -25,8 +25,11 @@ const Chat = (props) => {
   const { conversation } = props;
   const { otherUser } = conversation;
 
-  const handleClick = async (conversation) => {
-    await props.setActiveChat(conversation.otherUser.username);
+  const handleClick = (conversation) => {
+    props.userViewedConversation({
+      username: conversation.otherUser.username,
+      id: conversation.id,
+    });
   };
 
   return (
@@ -44,8 +47,8 @@ const Chat = (props) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    setActiveChat: (id) => {
-      dispatch(setActiveChat(id));
+    userViewedConversation: ({ username, id }) => {
+      dispatch(userViewedConversation({ username, id }));
     },
   };
 };
