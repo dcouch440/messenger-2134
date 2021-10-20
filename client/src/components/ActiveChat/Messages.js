@@ -7,13 +7,9 @@ import moment from "moment";
 const Messages = (props) => {
   const { messages, otherUser, userId } = props;
 
-  // messages are stored in a reverse order.
-  // reversing messages to display in the correct order.
-  const reversedMessages = [...messages].reverse();
-
   return (
     <Box>
-      {reversedMessages.map((message) => {
+      {messages.map((message) => {
         const time = moment(message.createdAt).format("h:mm");
 
         return message.senderId === userId ? (
