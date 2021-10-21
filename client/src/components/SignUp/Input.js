@@ -11,7 +11,7 @@ import React, { useState } from "react";
 import { Redirect, useHistory } from "react-router-dom";
 
 import { connect } from "react-redux";
-import { register } from "./store/utils/thunkCreators";
+import { register } from "../../store/utils/thunkCreators";
 
 const Login = (props) => {
   const history = useHistory();
