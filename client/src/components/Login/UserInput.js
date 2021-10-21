@@ -12,7 +12,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { login } from "../../store/utils/thunkCreators";
 
-const Login = (props) => {
+const UserInput = (props) => {
   const history = useHistory();
   const { user, login } = props;
 
@@ -81,4 +81,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default connect(mapStateToProps, mapDispatchToProps)(UserInput);
