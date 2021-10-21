@@ -10,7 +10,7 @@ import { Redirect, useHistory } from "react-router-dom";
 
 import React from "react";
 import { connect } from "react-redux";
-import { login } from "./store/utils/thunkCreators";
+import { login } from "../../store/utils/thunkCreators";
 
 const Login = (props) => {
   const history = useHistory();
