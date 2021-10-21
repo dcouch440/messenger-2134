@@ -4,16 +4,25 @@ import {
   FormControl,
   Grid,
   TextField,
-  Typography,
+  makeStyles,
 } from "@material-ui/core";
-import { Redirect, useHistory } from "react-router-dom";
 
+import ChangeRouteButton from "./components/ChangeRouteButton";
 import React from "react";
+import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
-import { login } from "../../store/utils/thunkCreators";
+import { login } from "./store/utils/thunkCreators";
+
+const useStyles = makeStyles(() => ({
+  root: {
+    width: "100%",
+    height: "100%",
+    display: "flex",
+  },
+}));
 
 const UserInput = (props) => {
-  const history = useHistory();
+  const classes = useStyles();
   const { user, login } = props;
 
   const handleLogin = async (event) => {
@@ -29,11 +38,14 @@ const UserInput = (props) => {
   }
 
   return (
-    <Grid container justify="center">
+    <Grid container className={classes.root}>
       <Box>
         <Grid container item>
-          <Typography>Need to register?</Typography>
-          <Button onClick={() => history.push("/register")}>Register</Button>
+          <ChangeRouteButton
+            route="/register"
+            sideText="Don't have an account?"
+            buttonText="Create account"
+          />
         </Grid>
         <form onSubmit={handleLogin}>
           <Grid>
