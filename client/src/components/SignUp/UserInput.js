@@ -13,7 +13,7 @@ import { Redirect, useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 import { register } from "../../store/utils/thunkCreators";
 
-const Login = (props) => {
+const UserInput = (props) => {
   const history = useHistory();
   const { user, register } = props;
   const [formErrorMessage, setFormErrorMessage] = useState({});
@@ -74,7 +74,7 @@ const Login = (props) => {
                   aria-label="password"
                   label="Password"
                   type="password"
-                  inputProps={{ minLength: 6 }}
+                  UserInputProps={{ minLength: 6 }}
                   name="password"
                   required
                 />
@@ -89,7 +89,7 @@ const Login = (props) => {
                   label="Confirm Password"
                   aria-label="confirm password"
                   type="password"
-                  inputProps={{ minLength: 6 }}
+                  UserInputProps={{ minLength: 6 }}
                   name="confirmPassword"
                   required
                 />
@@ -122,4 +122,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default connect(mapStateToProps, mapDispatchToProps)(UserInput);
