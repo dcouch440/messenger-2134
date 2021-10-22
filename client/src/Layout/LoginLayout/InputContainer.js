@@ -5,11 +5,18 @@ import React from "react";
 
 const useStyles = makeStyles((theme) => {
   const xsScreen = theme.breakpoints.down("sm");
+  const lgScreen = theme.breakpoints.up("lg");
+  const smlScreen = theme.breakpoints.down("sm");
 
   return {
     root: {
       flex: 1,
       width: "100%",
+      paddingLeft: "87px",
+      [smlScreen]: {
+        paddingLeft: "0",
+        paddingBottom: "25px",
+      },
     },
     innerBox: {
       width: "100%",
@@ -19,19 +26,31 @@ const useStyles = makeStyles((theme) => {
         justifyContent: "center",
       },
     },
+    innerInputContainer: {
+      display: "flex",
+      flexDirection: "column",
+      height: "358px",
+      justifyContent: "space-between",
+      width: "fit-content",
+      [lgScreen]: {
+        paddingTop: "20px",
+      },
+    },
   };
 });
 
 /**
- * @description InputContainer component is a Material-UI Container that fills the remaining space vertically when the parent element flex is set to column.
+ * @description InputContainer component is a Material-UI Container.
  */
 
 const InputContainer = ({ children }) => {
   const classes = useStyles();
 
   return (
-    <Container fluid className={classes.root}>
-      <Box className={classes.innerBox}>{children}</Box>
+    <Container className={classes.root}>
+      <Box className={classes.innerBox}>
+        <Box className={classes.innerInputContainer}>{children}</Box>
+      </Box>
     </Container>
   );
 };
