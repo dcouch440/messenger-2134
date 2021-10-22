@@ -18,9 +18,6 @@ const useStyles = makeStyles((theme) => {
       [smlScreen]: {
         width: "300px",
       },
-      [xsScreen]: {
-        width: "400px",
-      },
     },
     sText: {
       fontSize: "14px",
@@ -44,6 +41,7 @@ const useStyles = makeStyles((theme) => {
       },
       [xsScreen]: {
         boxShadow: "none",
+        width: "fit-content",
       },
     },
   };
