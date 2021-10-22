@@ -1,18 +1,29 @@
-import { FormControl, Grid, TextField, makeStyles } from "@material-ui/core";
+import {
+  Box,
+  FormControl,
+  FormHelperText,
+  TextField,
+  makeStyles,
+} from "@material-ui/core";
 
 import PropTypes from "prop-types";
 import React from "react";
+import { useHistory } from "react-router";
 
 const useStyles = makeStyles((theme) => {
   const smlScreen = theme.breakpoints.down("sm");
+  const xsScreen = theme.breakpoints.down("xs");
 
   return {
     root: {
       width: "380px",
       height: "66px",
-      marginBottom: "40px",
+      marginBottom: "36px",
       [smlScreen]: {
         width: "270px",
+      },
+      [xsScreen]: {
+        margin: "0",
       },
     },
     formControl: {
@@ -31,43 +42,90 @@ const useStyles = makeStyles((theme) => {
       "& .MuiFormLabel-root": {
         color: theme.colors.lightGrey,
         paddingLeft: "5px",
+        paddingBottom: "10px",
         fontSize: "14px",
       },
+    },
+    forgotPassword: {
+      ...theme.typography.fontWeightMedium,
+      position: "absolute",
+      paddingBottom: "10px",
+      bottom: 0,
+      right: "10px",
+      fontSize: "12px",
+      color: theme.colors.lightBlue,
+      fontWeight: "600",
     },
   };
 });
 
 /**
- *
  * @description LoginInput component is an text input created for the login screen.
- *
  */
 
-const LoginInput = ({ ariaLabel, label, required, type, name, ...props }) => {
+const LoginInput = ({
+  onChange,
+  ariaLabel,
+  label,
+  forgot,
+  required,
+  value,
+  type,
+  name,
+  UserInputProps,
+  error,
+  formHelperText,
+  ...props
+}) => {
+  const history = useHistory("/forgot-password");
   const classes = useStyles();
 
+  // placeholder
+  const handleRouteChange = () => history.push("/forgot-password-route");
+
   return (
-    <Grid className={classes.root}>
-      <FormControl className={classes.formControl} required={required}>
+    <Box className={classes.root}>
+      <FormControl
+        className={classes.formControl}
+        required={required}
+        error={error}
+      >
         <TextField
+          onChange={onChange}
           className={classes.input}
           aria-label={ariaLabel}
           label={label}
           name={name}
+          value={value}
           type={type}
+          UserInputProps={UserInputProps}
           {...props}
         />
+        {forgot ? (
+          <div className={classes.forgotPassword} onClick={handleRouteChange}>
+            Forgot?
+          </div>
+        ) : null}
+        {formHelperText ? (
+          <FormHelperText>{formHelperText}</FormHelperText>
+        ) : null}
       </FormControl>
-    </Grid>
+    </Box>
   );
 };
 
 LoginInput.propTypes = {
-  ariaLabel: PropTypes.string,
-  label: PropTypes.string,
-  name: PropTypes.string,
+  UserInputProps: PropTypes.object,
+  ariaLabel: PropTypes.string.isRequired,
+  error: PropTypes.bool,
+  forgot: PropTypes.bool,
+  formHelperText: PropTypes.string,
+  label: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  onChange: PropTypes.any,
   required: PropTypes.bool,
   type: PropTypes.string,
+  value: PropTypes.string,
 };
 
 export default LoginInput;
