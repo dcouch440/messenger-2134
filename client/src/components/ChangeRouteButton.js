@@ -4,10 +4,6 @@ import React from "react";
 import { theme } from "../themes/theme";
 import { useHistory } from "react-router";
 
-/**
- * header button for login and sign up
- */
-
 const useStyles = makeStyles(() => ({
   root: {
     width: "351px",
@@ -32,6 +28,12 @@ const useStyles = makeStyles(() => ({
     },
   },
 }));
+
+/**
+ *
+ * @description ChangeRouteButton is a button - and styled label component that takes a route as a prop and changes routes when pressed.
+ *
+ */
 
 const ChangeRouteButton = ({ route, buttonText, sideText }) => {
   const history = useHistory();
