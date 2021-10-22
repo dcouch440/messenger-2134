@@ -1,13 +1,8 @@
-import {
-  Box,
-  Button,
-  FormControl,
-  Grid,
-  TextField,
-  makeStyles,
-} from "@material-ui/core";
+import { Button, Grid, makeStyles } from "@material-ui/core";
+import { LoginLayout, TopButtonContainer } from "./Layout/LoginLayout";
 
 import ChangeRouteButton from "./components/ChangeRouteButton";
+import LoginInput from "./components/LoginInput";
 import React from "react";
 import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
@@ -17,7 +12,6 @@ const useStyles = makeStyles(() => ({
   root: {
     width: "100%",
     height: "100%",
-    display: "flex",
   },
 }));
 
@@ -38,35 +32,34 @@ const UserInput = (props) => {
   }
 
   return (
-    <Grid container className={classes.root}>
-      <Box>
-        <Grid container item>
+    <LoginLayout>
+      <Grid className={classes.root}>
+        <TopButtonContainer>
           <ChangeRouteButton
             route="/register"
             sideText="Don't have an account?"
             buttonText="Create account"
           />
-        </Grid>
+        </TopButtonContainer>
         <form onSubmit={handleLogin}>
+          {/*
+            example is currently E-mail
+          */}
           <Grid>
-            <Grid>
-              <FormControl margin="normal" required>
-                <TextField
-                  aria-label="username"
-                  label="Username"
-                  name="username"
-                  type="text"
-                />
-              </FormControl>
-            </Grid>
-            <FormControl margin="normal" required>
-              <TextField
-                label="password"
-                aria-label="password"
-                type="password"
-                name="password"
-              />
-            </FormControl>
+            <LoginInput
+              ariaLabel="username"
+              label="Username"
+              name="username"
+              type="text"
+              required={true}
+            />
+            <LoginInput
+              label="Password"
+              ariaLabel="password"
+              type="password"
+              name="password"
+              required={true}
+            />
             <Grid>
               <Button type="submit" variant="contained" size="large">
                 Login
@@ -74,8 +67,8 @@ const UserInput = (props) => {
             </Grid>
           </Grid>
         </form>
-      </Box>
-    </Grid>
+      </Grid>
+    </LoginLayout>
   );
 };
 
