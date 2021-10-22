@@ -15,7 +15,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const UserInput = (props) => {
+const Login = (props) => {
   const classes = useStyles();
   const { user, login } = props;
 
@@ -86,4 +86,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(UserInput);
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
