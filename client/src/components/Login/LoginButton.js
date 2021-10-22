@@ -1,4 +1,4 @@
-import { Button, makeStyles } from "@material-ui/core";
+import { Button, Typography, makeStyles } from "@material-ui/core";
 
 import PropTypes from "prop-types";
 import React from "react";
@@ -9,8 +9,9 @@ const useStyles = makeStyles((theme) => ({
     color: "white",
     width: "160px",
     height: "56px",
-    alignSelf: "center",
+    margin: "0 auto",
     borderRadius: "3px",
+    marginTop: "24px",
     "&:hover": {
       color: "black",
     },
@@ -21,17 +22,17 @@ const useStyles = makeStyles((theme) => ({
  * @description LoginButton component is a large blue Material-UI button.
  */
 
-const LoginButton = ({ text, onClick, type, variant }) => {
+const LoginButton = ({ text, onClick, type, variant, className }) => {
   const classes = useStyles();
   return (
     <Button
-      className={classes.root}
+      className={`${classes.root} ${className}`}
       onClick={onClick}
       type={type}
       variant={variant}
       size="large"
     >
-      {text}
+      <Typography>{text}</Typography>
     </Button>
   );
 };
@@ -39,6 +40,7 @@ const LoginButton = ({ text, onClick, type, variant }) => {
 export default LoginButton;
 
 LoginButton.propTypes = {
+  className: PropTypes.string,
   onClick: PropTypes.func,
   size: PropTypes.string,
   text: PropTypes.string,
