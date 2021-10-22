@@ -21,4 +21,11 @@ export const theme = createMuiTheme({
     primary: { main: "#3A8DFF" },
     secondary: { main: "#B0B0B0" },
   },
+  colors: {
+    lightBlue: "#3A8DFF",
+    lightGrey: "#b0b0b0",
+  },
+  fonts: {
+    monoserrat: "Montserrat, sans-serif",
+  },
 });
