@@ -10,6 +10,7 @@ const useStyles = makeStyles((theme) => {
     root: {
       width: "380px",
       height: "66px",
+      marginBottom: "40px",
       [smlScreen]: {
         width: "270px",
       },
@@ -29,7 +30,7 @@ const useStyles = makeStyles((theme) => {
       },
       "& .MuiFormLabel-root": {
         color: theme.colors.lightGrey,
-        paddingLeft: "10px",
+        paddingLeft: "5px",
         fontSize: "14px",
       },
     },
