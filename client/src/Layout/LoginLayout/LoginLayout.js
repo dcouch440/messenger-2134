@@ -1,23 +1,17 @@
-import {
-  Box,
-  Container,
-  Grid,
-  Typography,
-  makeStyles,
-} from "@material-ui/core";
+import { Box, Container, Typography, makeStyles } from "@material-ui/core";
 
+import PropTypes from "prop-types";
 import React from "react";
 import bgImage from "../../assets/img/bg-img.webp";
 import bubble from "../../assets/svg/bubble.svg";
 
 const useStyles = makeStyles((theme) => {
-  const xsScreen = theme.breakpoints.down("xs");
-  const smlScreen = theme.breakpoints.down("sml");
-  const mdScreen = theme.breakpoints.down("md");
+  const xsScreen = theme.breakpoints.only("xs");
+  const smlScreen = theme.breakpoints.only("sm");
+  const lgScreen = theme.breakpoints.up("lg");
 
   return {
     root: {
-      width: "100vw",
       height: "100vh",
       minHeight: "650px",
       display: "flex",
@@ -27,50 +21,50 @@ const useStyles = makeStyles((theme) => {
       flex: 1,
     },
     sideBanner: {
-      height: "100vh",
-      minWidth: "425px",
-      maxWidth: "600px",
-      width: "30%",
+      position: "relative",
+      height: "100%",
+      width: "425px",
       backgroundColor: "rgb(134,185,255)",
       background: `
-        linear-gradient(0deg, rgba(134,185,255,.85) 0%, rgba(58,141,255,.85) 100%),
-        url(${bgImage})
+      linear-gradient(0deg, rgba(134,185,255,.85) 0%, rgba(58,141,255,.85) 100%),
+      url(${bgImage})
       `,
       backgroundSize: "100%",
       backgroundRepeat: "no-repeat",
-      [mdScreen]: {
-        width: "30%",
-        backgroundSize: "cover",
-      },
-      [smlScreen]: {
-        minWidth: "220px",
-        width: "20%",
+      [lgScreen]: {
+        width: "550px",
       },
       [xsScreen]: {
         display: "none",
       },
     },
-    slogan: {
-      [mdScreen]: {
-        width: "100%",
-        marginTop: "300px",
-        display: "flex",
-        alignItems: "center",
-        flexDirection: "column",
-        textAlign: "center",
+    sloganAndBubbleContainer: {
+      position: "absolute",
+      top: "190px",
+      right: 0,
+      left: 0,
+      width: "270px",
+      margin: "0 auto",
+      textAlign: "center",
+      [lgScreen]: {
+        top: "260px",
+      },
+      [smlScreen]: {
+        width: "240px",
       },
     },
     sloganText: {
+      ...theme.typography.fontWeightMedium,
       color: "white",
-      [mdScreen]: {
-        ...theme.typography.fontWeightMedium,
-        marginTop: "15px",
-        fontSize: "16px",
+      marginTop: "15px",
+      fontSize: "26px",
+      [smlScreen]: {
+        fontSize: "20px",
       },
     },
     bubble: {
-      [mdScreen]: {
-        width: "70px",
+      [lgScreen]: {
+        width: "67px",
       },
     },
   };
@@ -86,13 +80,13 @@ const LoginLayout = ({ children }) => {
   const classes = useStyles();
 
   return (
-    <Grid container className={classes.root}>
+    <Box className={classes.root}>
       <Box className={classes.sideBanner}>
-        <Box className={classes.slogan}>
+        <Box className={classes.sloganAndBubbleContainer}>
           <img
             className={classes.bubble}
             src={bubble}
-            alt="Chat bubble overlay svg"
+            alt="Chat bubble svg with three dots in the middle."
           />
           <Typography className={classes.sloganText}>
             Converse with anyone with any language
@@ -100,8 +94,15 @@ const LoginLayout = ({ children }) => {
         </Box>
       </Box>
       <Container className={classes.children}>{children}</Container>
-    </Grid>
+    </Box>
   );
+};
+
+LoginLayout.propTypes = {
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+  ]).isRequired,
 };
 
 export default LoginLayout;
