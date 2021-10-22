@@ -1,46 +1,64 @@
 import { Box, Button, Typography, makeStyles } from "@material-ui/core";
 
+import PropTypes from "prop-types";
 import React from "react";
-import { theme } from "../themes/theme";
 import { useHistory } from "react-router";
 
-const useStyles = makeStyles(() => ({
-  root: {
-    width: "351px",
-    height: "54px",
-    alignItems: "center",
-    display: "flex",
-    justifyContent: "space-between",
-  },
-  sText: {
-    fontSize: "14px",
-  },
-  routeButton: {
-    backgroundColor: "transparent",
-    width: "170px",
-    height: "54px",
-    boxShadow: "1px 2px 13px 3px #00000030",
-    borderRadius: "10px",
-    color: theme.colors.lightBlue,
-    fontFamily: theme.fonts.monoserrat,
-    "&:hover": {
-      backgroundColor: "#FFFFFF10",
+const useStyles = makeStyles((theme) => {
+  const smlScreen = theme.breakpoints.down("sm");
+  const xsScreen = theme.breakpoints.down("xs");
+
+  return {
+    root: {
+      width: "351px",
+      height: "54px",
+      alignItems: "center",
+      display: "flex",
+      justifyContent: "space-between",
+      [smlScreen]: {
+        width: "300px",
+      },
+      [xsScreen]: {
+        width: "400px",
+      },
     },
-  },
-}));
+    sText: {
+      fontSize: "14px",
+      color: theme.colors.lightGrey,
+    },
+    routeButton: {
+      backgroundColor: "transparent",
+      width: "170px",
+      height: "54px",
+      fontSize: "14px",
+      boxShadow: "0px 2px 12px rgba(74,106,149,0.2)",
+      borderRadius: "5px",
+      color: theme.colors.lightBlue,
+      fontFamily: theme.fonts.monoserrat,
+      "&:hover": {
+        backgroundColor: "#FFFFFF10",
+      },
+      [smlScreen]: {
+        width: "160px",
+        fontSize: "12px",
+      },
+      [xsScreen]: {
+        boxShadow: "none",
+      },
+    },
+  };
+});
 
 /**
- *
- * @description ChangeRouteButton is a button - and styled label component that takes a route as a prop and changes routes when pressed.
- *
+ * @description ChangeRouteButton is a button + styled label component that takes a route as a prop to chang routes when pressed.
  */
 
-const ChangeRouteButton = ({ route, buttonText, sideText }) => {
+const ChangeRouteButton = ({ route, buttonText, sideText, className }) => {
   const history = useHistory();
   const classes = useStyles();
 
   return (
-    <Box className={classes.root}>
+    <Box className={`${classes.root} ${className}`}>
       <Typography className={classes.sText}>{sideText}</Typography>
       <Button
         className={classes.routeButton}
@@ -51,6 +69,13 @@ const ChangeRouteButton = ({ route, buttonText, sideText }) => {
       </Button>
     </Box>
   );
+};
+
+ChangeRouteButton.propTypes = {
+  buttonText: PropTypes.string,
+  className: PropTypes.string,
+  route: PropTypes.string,
+  sideText: PropTypes.string,
 };
 
 export default ChangeRouteButton;
