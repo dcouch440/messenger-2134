@@ -1,33 +1,40 @@
 import { FormControl, Grid, TextField, makeStyles } from "@material-ui/core";
 
+import PropTypes from "prop-types";
 import React from "react";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    width: "380px",
-    height: "66px",
-  },
-  formControl: {
-    width: "inherit",
-    padding: "5px",
-  },
-  input: {
-    backgroundColor: "transparent",
-    width: "inherit",
-    "& .MuiInputBase-input": {
-      padding: " 10px 5px",
-      lineHeight: "19px",
-      fontSize: "14px",
-      fontWeight: "600",
-      borderBottomWidth: "2px",
+const useStyles = makeStyles((theme) => {
+  const smlScreen = theme.breakpoints.down("sm");
+
+  return {
+    root: {
+      width: "380px",
+      height: "66px",
+      [smlScreen]: {
+        width: "270px",
+      },
     },
-    "& .MuiFormLabel-root": {
-      color: theme.colors.lightGrey,
-      paddingLeft: "10px",
-      fontSize: "14px",
+    formControl: {
+      width: "inherit",
     },
-  },
-}));
+    input: {
+      backgroundColor: "transparent",
+      width: "inherit",
+      "& .MuiInputBase-input": {
+        padding: " 10px 5px",
+        lineHeight: "19px",
+        fontSize: "14px",
+        fontWeight: "600",
+        borderBottomWidth: "2px",
+      },
+      "& .MuiFormLabel-root": {
+        color: theme.colors.lightGrey,
+        paddingLeft: "10px",
+        fontSize: "14px",
+      },
+    },
+  };
+});
 
 /**
  *
@@ -52,6 +59,14 @@ const LoginInput = ({ ariaLabel, label, required, type, name, ...props }) => {
       </FormControl>
     </Grid>
   );
+};
+
+LoginInput.propTypes = {
+  ariaLabel: PropTypes.string,
+  label: PropTypes.string,
+  name: PropTypes.string,
+  required: PropTypes.bool,
+  type: PropTypes.string,
 };
 
 export default LoginInput;
