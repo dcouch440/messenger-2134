@@ -22,11 +22,12 @@ const useStyles = makeStyles(() => ({
 
 const Chat = (props) => {
   const classes = useStyles();
-  const { conversation } = props;
+  const { conversation, setActiveChat } = props;
   const { otherUser } = conversation;
 
-  const handleClick = async (conversation) => {
-    await props.setActiveChat(conversation.otherUser.username);
+  const handleClick = (conversation) => {
+    const { username } = conversation.otherUser;
+    setActiveChat(username);
   };
 
   return (
@@ -44,8 +45,8 @@ const Chat = (props) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    setActiveChat: (id) => {
-      dispatch(setActiveChat(id));
+    setActiveChat: (username) => {
+      dispatch(setActiveChat(username));
     },
   };
 };
