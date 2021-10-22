@@ -1,12 +1,10 @@
+import { Box, makeStyles } from "@material-ui/core";
 import {
-  Box,
-  Button,
-  FormControl,
-  FormHelperText,
-  Grid,
-  TextField,
-} from "@material-ui/core";
-import { LoginLayout, TopButtonContainer } from "./Layout/LoginLayout";
+  InputContainer,
+  LoginLayout,
+  TopButtonContainer,
+} from "./Layout/LoginLayout";
+import { LoginButton, LoginHeader, LoginInput } from "./components/Login";
 import React, { useState } from "react";
 
 import ChangeRouteButton from "./components/ChangeRouteButton";
@@ -14,21 +12,51 @@ import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { register } from "./store/utils/thunkCreators";
 
+const useStyles = makeStyles(() => ({
+  root: {
+    width: "100%",
+    height: "100%",
+    display: "flex",
+    flexDirection: "column",
+  },
+  form: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-between",
+    flex: 1,
+  },
+  header: {
+    marginBottom: "20px",
+  },
+  createButton: {
+    marginTop: "4px",
+  },
+}));
+
+/**
+ * @description Signup Component is a full page component for users to login
+ */
+
 const Signup = (props) => {
   const { user, register } = props;
-  const [formErrorMessage, setFormErrorMessage] = useState({});
+  const [signupInputs, setSignupInputs] = useState({
+    username: "",
+    email: "",
+    password: "",
+  });
+  const classes = useStyles();
+
+  const handleChange = ({ target }) => {
+    const { name, value } = target;
+    setSignupInputs((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
 
   const handleRegister = async (event) => {
     event.preventDefault();
-    const username = event.target.username.value;
-    const email = event.target.email.value;
-    const password = event.target.password.value;
-    const confirmPassword = event.target.confirmPassword.value;
-
-    if (password !== confirmPassword) {
-      setFormErrorMessage({ confirmPassword: "Passwords must match" });
-      return;
-    }
+    const { username, email, password } = signupInputs;
 
     await register({ username, email, password });
   };
@@ -39,76 +67,54 @@ const Signup = (props) => {
 
   return (
     <LoginLayout>
-      <Grid container justify="center">
-        <Box>
-          <TopButtonContainer>
-            <ChangeRouteButton
-              route="/login"
-              sideText="Already have an account?"
-              buttonText="Login"
+      <TopButtonContainer>
+        <ChangeRouteButton
+          route="/login"
+          sideText="Already have an account?"
+          buttonText="Login"
+        />
+      </TopButtonContainer>
+      <InputContainer>
+        <form className={classes.form} onSubmit={handleRegister}>
+          <LoginHeader className={classes.header} text="Create an account." />
+          <Box>
+            <LoginInput
+              ariaLabel="username"
+              label="Username"
+              name="username"
+              type="text"
+              onChange={handleChange}
+              value={signupInputs.username}
+              required
             />
-          </TopButtonContainer>
-          <form onSubmit={handleRegister}>
-            <Grid>
-              <Grid>
-                <FormControl>
-                  <TextField
-                    aria-label="username"
-                    label="Username"
-                    name="username"
-                    type="text"
-                    required
-                  />
-                </FormControl>
-              </Grid>
-              <Grid>
-                <FormControl>
-                  <TextField
-                    label="E-mail address"
-                    aria-label="e-mail address"
-                    type="email"
-                    name="email"
-                    required
-                  />
-                </FormControl>
-              </Grid>
-              <Grid>
-                <FormControl error={!!formErrorMessage.confirmPassword}>
-                  <TextField
-                    aria-label="password"
-                    label="Password"
-                    type="password"
-                    UserInputProps={{ minLength: 6 }}
-                    name="password"
-                    required
-                  />
-                  <FormHelperText>
-                    {formErrorMessage.confirmPassword}
-                  </FormHelperText>
-                </FormControl>
-              </Grid>
-              <Grid>
-                <FormControl error={!!formErrorMessage.confirmPassword}>
-                  <TextField
-                    label="Confirm Password"
-                    aria-label="confirm password"
-                    type="password"
-                    UserInputProps={{ minLength: 6 }}
-                    name="confirmPassword"
-                    required
-                  />
-                  <FormHelperText>
-                    {formErrorMessage.confirmPassword}
-                  </FormHelperText>
-                </FormControl>
-              </Grid>
-              <Button type="submit" variant="contained" size="large">
-                Create
-              </Button>
-            </Grid>
-          </form>
-        </Box>
-      </Grid>
+            <LoginInput
+              ariaLabel="e-mail address"
+              label="E-mail address"
+              type="email"
+              name="email"
+              onChange={handleChange}
+              value={signupInputs.email}
+            />
+            <LoginInput
+              ariaLabel="password"
+              label="password"
+              UserInputProps={{ minLength: 6 }}
+              type="password"
+              name="password"
+              onChange={handleChange}
+              value={signupInputs.password}
+              required
+            />
+          </Box>
+          <LoginButton
+            className={classes.createButton}
+            type="submit"
+            variant="contained"
+            size="large"
+            text="Create"
+          />
+        </form>
+      </InputContainer>
     </LoginLayout>
   );
 };
