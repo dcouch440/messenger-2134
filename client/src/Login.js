@@ -5,57 +5,47 @@ import {
   TopButtonContainer,
 } from "./Layout/LoginLayout";
 import { LoginButton, LoginHeader, LoginInput } from "./components/Login";
+import React, { useState } from "react";
 
 import ChangeRouteButton from "./components/ChangeRouteButton";
-import React from "react";
 import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { login } from "./store/utils/thunkCreators";
 
-const useStyles = makeStyles((theme) => {
-  const lgScreen = theme.breakpoints.up("lg");
+const useStyles = makeStyles(() => ({
+  form: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-between",
+    flex: 1,
+  },
+}));
 
-  return {
-    root: {
-      width: "100%",
-      height: "100%",
-      display: "flex",
-      flexDirection: "column",
-    },
-    innerInputContainer: {
-      display: "flex",
-      flexDirection: "column",
-      height: "358px",
-      justifyContent: "space-between",
-      width: "fit-content",
-      [lgScreen]: {
-        paddingTop: "20px",
-      },
-    },
-    buttonContainer: {
-      display: "flex",
-      flexDirection: "column",
-      width: "fit-content",
-    },
-    form: {
-      display: "flex",
-      flexDirection: "column",
-      justifyContent: "space-between",
-      flex: 1,
-    },
-  };
-});
+/**
+ * @description Login Component is a full page component for users to login
+ */
 
 const Login = (props) => {
-  const classes = useStyles();
   const { user, login } = props;
+  const [loginInputs, setLoginInputs] = useState({
+    username: "",
+    password: "",
+  });
+  const classes = useStyles();
 
   const handleLogin = async (event) => {
     event.preventDefault();
-    const username = event.target.username.value;
-    const password = event.target.password.value;
+    const { username, password } = loginInputs;
 
     await login({ username, password });
+  };
+
+  const handleChange = ({ target }) => {
+    const { name, value } = target;
+    setLoginInputs((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
   };
 
   if (user.id) {
@@ -64,45 +54,46 @@ const Login = (props) => {
 
   return (
     <LoginLayout>
-      <Box className={classes.root}>
-        <TopButtonContainer>
-          <ChangeRouteButton
-            route="/register"
-            sideText="Don't have an account?"
-            buttonText="Create account"
-          />
-        </TopButtonContainer>
-        <InputContainer>
-          <Box className={classes.innerInputContainer}>
-            <form className={classes.form} onSubmit={handleLogin}>
-              {/*  example is currently E-mail, project expects Username */}
-              <LoginHeader text="Welcome Back!" />
-              <div>
-                <LoginInput
-                  ariaLabel="username"
-                  label="Username"
-                  name="username"
-                  type="text"
-                  required
-                />
-                <LoginInput
-                  label="Password"
-                  ariaLabel="password"
-                  type="password"
-                  name="password"
-                  required
-                />
-              </div>
-              <LoginButton
-                type="submit"
-                variant="contained"
-                size="large"
-                text="Login"
-              />
-            </form>
+      <TopButtonContainer>
+        <ChangeRouteButton
+          route="/register"
+          sideText="Don't have an account?"
+          buttonText="Create account"
+        />
+      </TopButtonContainer>
+      <InputContainer>
+        <form className={classes.form} onSubmit={handleLogin}>
+          {/*  example is currently E-mail, project expects Username */}
+          <LoginHeader text="Welcome Back!" />
+          <Box>
+            <LoginInput
+              ariaLabel="username"
+              label="Username"
+              name="username"
+              type="text"
+              onChange={handleChange}
+              value={loginInputs.username}
+              required
+            />
+            <LoginInput
+              label="Password"
+              ariaLabel="password"
+              type="password"
+              name="password"
+              onChange={handleChange}
+              value={loginInputs.password}
+              forgot
+              required
+            />
           </Box>
-        </InputContainer>
-      </Box>
+          <LoginButton
+            type="submit"
+            variant="contained"
+            size="large"
+            text="Login"
+          />
+        </form>
+      </InputContainer>
     </LoginLayout>
   );
 };
