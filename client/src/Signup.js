@@ -44,8 +44,8 @@ const Signup = (props) => {
           <TopButtonContainer>
             <ChangeRouteButton
               route="/login"
-              sideText="Don't have an account?"
-              buttonText="Create account"
+              sideText="Already have an account?"
+              buttonText="Login"
             />
           </TopButtonContainer>
           <form onSubmit={handleRegister}>
