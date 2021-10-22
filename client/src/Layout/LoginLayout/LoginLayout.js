@@ -6,7 +6,7 @@ import bgImage from "../../assets/img/bg-img.webp";
 import bubble from "../../assets/svg/bubble.svg";
 
 const useStyles = makeStyles((theme) => {
-  const xsScreen = theme.breakpoints.only("xs");
+  const xsScreen = theme.breakpoints.down("xs");
   const smlScreen = theme.breakpoints.only("sm");
   const lgScreen = theme.breakpoints.up("lg");
 
@@ -16,9 +16,19 @@ const useStyles = makeStyles((theme) => {
       minHeight: "650px",
       display: "flex",
     },
-    children: {
+    childrenOuter: {
       height: "100%",
       flex: 1,
+      paddingBottom: "25px",
+    },
+    children: {
+      width: "100%",
+      height: "100%",
+      display: "flex",
+      flexDirection: "column",
+      [xsScreen]: {
+        flexDirection: "column-reverse",
+      },
     },
     sideBanner: {
       position: "relative",
@@ -26,8 +36,8 @@ const useStyles = makeStyles((theme) => {
       width: "425px",
       backgroundColor: "rgb(134,185,255)",
       background: `
-      linear-gradient(0deg, rgba(134,185,255,.85) 0%, rgba(58,141,255,.85) 100%),
-      url(${bgImage})
+        linear-gradient(0deg, rgba(134,185,255,.85) 0%, rgba(58,141,255,.85) 100%),
+        url(${bgImage})
       `,
       backgroundSize: "100%",
       backgroundRepeat: "no-repeat",
@@ -35,10 +45,11 @@ const useStyles = makeStyles((theme) => {
         width: "550px",
       },
       [xsScreen]: {
-        display: "none",
+        width: "20px",
+        background: "none",
       },
     },
-    sloganAndBubbleContainer: {
+    sloganAndBubbleBox: {
       position: "absolute",
       top: "190px",
       right: 0,
@@ -52,11 +63,14 @@ const useStyles = makeStyles((theme) => {
       [smlScreen]: {
         width: "240px",
       },
+      [xsScreen]: {
+        display: "none",
+      },
     },
     sloganText: {
       ...theme.typography.fontWeightMedium,
       color: "white",
-      marginTop: "15px",
+      marginTop: "39px",
       fontSize: "26px",
       [smlScreen]: {
         fontSize: "20px",
@@ -82,7 +96,7 @@ const LoginLayout = ({ children }) => {
   return (
     <Box className={classes.root}>
       <Box className={classes.sideBanner}>
-        <Box className={classes.sloganAndBubbleContainer}>
+        <Box className={classes.sloganAndBubbleBox}>
           <img
             className={classes.bubble}
             src={bubble}
@@ -93,7 +107,9 @@ const LoginLayout = ({ children }) => {
           </Typography>
         </Box>
       </Box>
-      <Container className={classes.children}>{children}</Container>
+      <Container className={classes.childrenOuter}>
+        <Box className={classes.children}>{children}</Box>
+      </Container>
     </Box>
   );
 };
