@@ -10,7 +10,7 @@ const useStyles = makeStyles((theme) => {
     root: {
       fontSize: "26px",
       fontWeight: "600",
-      marginBottom: "23px",
+      marginBottom: "40px",
       [lgScreen]: {
         fontSize: "36px",
       },
@@ -21,16 +21,17 @@ const useStyles = makeStyles((theme) => {
  * @description LoginHeader component displays an Material-UI Typography h2 element that increases in side for large screens.
  */
 
-const LoginHeader = ({ text }) => {
+const LoginHeader = ({ text, className }) => {
   const classes = useStyles();
   return (
-    <Typography className={classes.root} variant="h2">
+    <Typography className={`${classes.root} ${className}`} variant="h2">
       {text}
     </Typography>
   );
 };
 
 LoginHeader.propTypes = {
+  className: PropTypes.string,
   text: PropTypes.string.isRequired,
 };
 
