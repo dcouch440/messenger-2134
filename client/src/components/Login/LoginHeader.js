@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => {
   };
 });
 /**
- * @description LoginHeader component displays an Material-UI Typography h2 element that increases in side for large screens.
+ * @description LoginHeader component displays an Material-UI Typography h2 element that increases in size for large screens.
  */
 
 const LoginHeader = ({ text, className }) => {
