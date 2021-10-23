@@ -3,6 +3,7 @@ import {
   FormControl,
   FormHelperText,
   TextField,
+  Typography,
   makeStyles,
 } from "@material-ui/core";
 
@@ -11,7 +12,6 @@ import React from "react";
 import { useHistory } from "react-router";
 
 const useStyles = makeStyles((theme) => {
-  const smlScreen = theme.breakpoints.down("sm");
   const xsScreen = theme.breakpoints.down("xs");
 
   return {
@@ -19,10 +19,8 @@ const useStyles = makeStyles((theme) => {
       width: "380px",
       height: "66px",
       marginBottom: "36px",
-      [smlScreen]: {
-        width: "270px",
-      },
       [xsScreen]: {
+        width: "85vw",
         margin: "0",
       },
     },
@@ -102,12 +100,15 @@ const LoginInput = ({
           {...props}
         />
         {forgot ? (
-          <div className={classes.forgotPassword} onClick={handleRouteChange}>
+          <Typography
+            className={classes.forgotPassword}
+            onClick={handleRouteChange}
+          >
             Forgot?
-          </div>
+          </Typography>
         ) : null}
         {formHelperText ? (
-          <FormHelperText>{formHelperText}</FormHelperText>
+          <FormHelperText id={ariaLabel}>{formHelperText}</FormHelperText>
         ) : null}
       </FormControl>
     </Box>
