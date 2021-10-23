@@ -18,10 +18,16 @@ const useStyles = makeStyles((theme) => {
       [smlScreen]: {
         width: "300px",
       },
+      [xsScreen]: {
+        width: "85%",
+      },
     },
     sText: {
       fontSize: "14px",
       color: theme.colors.lightGrey,
+      [xsScreen]: {
+        fontSize: "10px",
+      },
     },
     routeButton: {
       backgroundColor: "transparent",
@@ -42,6 +48,7 @@ const useStyles = makeStyles((theme) => {
       [xsScreen]: {
         boxShadow: "none",
         width: "fit-content",
+        padding: 0,
       },
     },
   };
