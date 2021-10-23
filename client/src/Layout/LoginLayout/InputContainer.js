@@ -18,6 +18,7 @@ const useStyles = makeStyles((theme) => {
         paddingLeft: "0",
         paddingRight: "0",
         paddingBottom: "25px",
+        maxHeight: "600px",
       },
     },
     innerBox: {

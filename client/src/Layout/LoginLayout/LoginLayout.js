@@ -32,6 +32,7 @@ const useStyles = makeStyles((theme) => {
       flexDirection: "column",
       [xsScreen]: {
         flexDirection: "column-reverse",
+        justifyContent: "space-around",
       },
     },
   };

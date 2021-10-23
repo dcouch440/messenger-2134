@@ -15,12 +15,19 @@ const useStyles = makeStyles((theme) => {
       margin: "0 auto",
       borderRadius: "3px",
       marginTop: "24px",
+      boxShadow: "none",
+      fontFamily: theme.fonts.monoserrat,
       "&:hover": {
-        color: "black",
+        backgroundColor: "transparent",
+        color: theme.colors.lightBlue,
       },
       [xsScreen]: {
         width: "100%",
       },
+    },
+    text: {
+      fontSize: "16px",
+      lineHeight: "19px",
     },
   };
 });
@@ -39,7 +46,7 @@ const LoginButton = ({ text, onClick, type, variant, className }) => {
       variant={variant}
       size="large"
     >
-      <Typography>{text}</Typography>
+      <Typography className={classes.text}>{text}</Typography>
     </Button>
   );
 };
