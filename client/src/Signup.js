@@ -2,7 +2,7 @@ import {
   InputContainer,
   LoginLayout,
   TopButtonContainer,
-} from "./Layout/LoginLayout";
+} from "./Layout/Login";
 
 import { ChangeRouteButton } from "./components";
 import React from "react";
