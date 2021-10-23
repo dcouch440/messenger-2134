@@ -5,6 +5,7 @@ import React from "react";
 
 const useStyles = makeStyles((theme) => {
   const lgScreen = theme.breakpoints.up("lg");
+  const xsScreen = theme.breakpoints.down("sm");
 
   return {
     root: {
@@ -13,6 +14,11 @@ const useStyles = makeStyles((theme) => {
       marginBottom: "40px",
       [lgScreen]: {
         fontSize: "36px",
+      },
+      [xsScreen]: {
+        fontSize: "14px",
+        marginBottom: "14px",
+        textAlign: "center",
       },
     },
   };
