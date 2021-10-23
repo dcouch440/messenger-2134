@@ -7,7 +7,7 @@ import {
 import ChangeRouteButton from "./components/ChangeRouteButton";
 import React from "react";
 import { Redirect } from "react-router-dom";
-import { SignupForm } from "./components/Login";
+import { SignupForm } from "./components/Signup";
 import { connect } from "react-redux";
 import { register } from "./store/utils/thunkCreators";
 
