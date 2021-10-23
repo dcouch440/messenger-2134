@@ -24,6 +24,7 @@ const useStyles = makeStyles((theme) => {
       },
       [xsScreen]: {
         justifyContent: "center",
+        padding: "0",
       },
     },
   };
