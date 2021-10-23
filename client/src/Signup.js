@@ -4,7 +4,7 @@ import {
   TopButtonContainer,
 } from "./Layout/LoginLayout";
 
-import ChangeRouteButton from "./components/ChangeRouteButton";
+import { ChangeRouteButton } from "./components";
 import React from "react";
 import { Redirect } from "react-router-dom";
 import { SignupForm } from "./components/Signup";
@@ -12,7 +12,7 @@ import { connect } from "react-redux";
 import { register } from "./store/utils/thunkCreators";
 
 /**
- * @description Signup Component is a full page component for users to signup
+ * @description Signup Component is a Material-UI full page component for users to signup
  */
 
 const Signup = (props) => {
