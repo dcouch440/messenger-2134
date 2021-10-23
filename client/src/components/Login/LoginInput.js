@@ -1,6 +1,7 @@
 import {
   Box,
   FormControl,
+  FormHelperText,
   TextField,
   Typography,
   makeStyles,
@@ -24,6 +25,7 @@ const useStyles = makeStyles((theme) => {
       [xsScreen]: {
         width: "85vw",
         margin: "0",
+        height: "56px",
       },
     },
     formControl: {
@@ -47,6 +49,7 @@ const useStyles = makeStyles((theme) => {
       },
     },
     forgotPassword: {
+      ...theme.typography.fontWeightMedium,
       position: "absolute",
       paddingBottom: "10px",
       bottom: 0,
@@ -73,6 +76,8 @@ const LoginInput = ({
   name,
   UserInputProps,
   error,
+  formHelperText,
+  ariaDescribedBy,
   ...props
 }) => {
   const history = useHistory("/forgot-password");
@@ -97,6 +102,7 @@ const LoginInput = ({
           value={value}
           type={type}
           UserInputProps={UserInputProps}
+          aria-describedby={ariaDescribedBy}
           {...props}
         />
         {forgot ? (
@@ -107,6 +113,9 @@ const LoginInput = ({
             Forgot?
           </Typography>
         ) : null}
+        {formHelperText ? (
+          <FormHelperText id={ariaDescribedBy}>{formHelperText}</FormHelperText>
+        ) : null}
       </FormControl>
     </Box>
   );
@@ -114,15 +123,17 @@ const LoginInput = ({
 
 LoginInput.propTypes = {
   UserInputProps: PropTypes.object,
+  ariaDescribedBy: PropTypes.string,
   ariaLabel: PropTypes.string.isRequired,
   error: PropTypes.bool,
   forgot: PropTypes.bool,
+  formHelperText: PropTypes.string,
   label: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
-  onChange: PropTypes.any,
+  onChange: PropTypes.func,
   required: PropTypes.bool,
   type: PropTypes.string,
-  value: PropTypes.string,
+  value: PropTypes.PropTypes.string,
 };
 
 export default LoginInput;
