@@ -35,12 +35,18 @@ const useStyles = makeStyles(() => ({
  */
 
 const SignupForm = ({ onSubmit }) => {
-  const [{ username, email, password }, setSignupInputs] = useState({
-    username: "",
-    email: "",
-    password: "",
+  const [formErrorMessage, setFormErrorMessage] = useState({
+    confirmPassword: "",
   });
+  const [{ username, email, password, confirmPassword }, setSignupInputs] =
+    useState({
+      username: "",
+      email: "",
+      password: "",
+      confirmPassword: "",
+    });
   const classes = useStyles();
+  const hasError = Boolean(formErrorMessage.confirmPassword);
 
   const handleChange = ({ target }) => {
     const { name, value } = target;
@@ -50,8 +56,14 @@ const SignupForm = ({ onSubmit }) => {
     }));
   };
 
-  const handleSubmit = (event) =>
-    onSubmit(event, { username, email, password });
+  const handleSubmit = (event) => {
+    if (password !== confirmPassword) {
+      setFormErrorMessage({ confirmPassword: "Passwords must match" });
+      return;
+    }
+
+    onSubmit(event, { username, email, password, confirmPassword });
+  };
 
   return (
     <form className={classes.form} onSubmit={handleSubmit}>
@@ -78,11 +90,27 @@ const SignupForm = ({ onSubmit }) => {
         <LoginInput
           ariaLabel="password"
           label="password"
+          ariaDescribedBy="password-input"
           UserInputProps={{ minLength: 6 }}
           type="password"
           name="password"
+          error={hasError}
+          formHelperText={formErrorMessage.confirmPassword}
           onChange={handleChange}
           value={password}
+          required
+        />
+        <LoginInput
+          ariaLabel="confirm password"
+          ariaDescribedBy="password-confirmation"
+          label="Confirm Password"
+          UserInputProps={{ minLength: 6 }}
+          type="password"
+          name="confirmPassword"
+          error={hasError}
+          formHelperText={formErrorMessage.confirmPassword}
+          onChange={handleChange}
+          value={confirmPassword}
           required
         />
       </Box>
