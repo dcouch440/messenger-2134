@@ -3,20 +3,27 @@ import { Button, Typography, makeStyles } from "@material-ui/core";
 import PropTypes from "prop-types";
 import React from "react";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    backgroundColor: theme.colors.lightBlue,
-    color: "white",
-    width: "160px",
-    height: "56px",
-    margin: "0 auto",
-    borderRadius: "3px",
-    marginTop: "24px",
-    "&:hover": {
-      color: "black",
+const useStyles = makeStyles((theme) => {
+  const xsScreen = theme.breakpoints.down("xs");
+
+  return {
+    root: {
+      backgroundColor: theme.colors.lightBlue,
+      color: "white",
+      width: "160px",
+      height: "56px",
+      margin: "0 auto",
+      borderRadius: "3px",
+      marginTop: "24px",
+      "&:hover": {
+        color: "black",
+      },
+      [xsScreen]: {
+        width: "100%",
+      },
     },
-  },
-}));
+  };
+});
 
 /**
  * @description LoginButton component is a large blue Material-UI button.
