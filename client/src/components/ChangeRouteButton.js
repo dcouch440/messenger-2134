@@ -20,6 +20,7 @@ const useStyles = makeStyles((theme) => {
       },
       [xsScreen]: {
         width: "85%",
+        height: "unset",
       },
     },
     sText: {

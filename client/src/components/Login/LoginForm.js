@@ -13,6 +13,9 @@ const useStyles = makeStyles(() => {
       justifyContent: "space-between",
       flex: 1,
     },
+    bubble: {
+      paddingBottom: "52px",
+    },
   };
 });
 
@@ -40,7 +43,7 @@ const LoginForm = ({ onSubmit }) => {
   return (
     <form className={classes.root} onSubmit={handleSubmit}>
       {/* shows on mobile only */}
-      <LoginBubbleMobile />
+      <LoginBubbleMobile className={classes.bubble} />
       {/*  example is currently E-mail, project expects Username */}
       <Box>
         <LoginHeader text="Welcome Back!" />

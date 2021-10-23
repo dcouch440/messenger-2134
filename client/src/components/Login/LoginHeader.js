@@ -17,8 +17,9 @@ const useStyles = makeStyles((theme) => {
       },
       [xsScreen]: {
         fontSize: "14px",
-        marginBottom: "14px",
-        textAlign: "center",
+        margin: "0",
+        marginTop: "45px",
+        paddingBottom: "15px",
       },
     },
   };

@@ -18,7 +18,10 @@ const useStyles = makeStyles((theme) => {
         paddingLeft: "0",
         paddingRight: "0",
         paddingBottom: "25px",
-        maxHeight: "600px",
+        maxHeight: "800px",
+      },
+      [xsScreen]: {
+        padding: "0",
       },
     },
     innerBox: {

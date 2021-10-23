@@ -19,7 +19,6 @@ const useStyles = makeStyles((theme) => {
       height: "100%",
       width: "100%",
       flex: 1,
-      paddingBottom: "25px",
       [xsScreen]: {
         paddingRight: 0,
         paddingLeft: 0,
@@ -32,7 +31,6 @@ const useStyles = makeStyles((theme) => {
       flexDirection: "column",
       [xsScreen]: {
         flexDirection: "column-reverse",
-        justifyContent: "space-around",
       },
     },
   };
