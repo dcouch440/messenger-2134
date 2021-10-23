@@ -63,6 +63,10 @@ const useStyles = makeStyles((theme) => {
   };
 });
 
+/**
+ * @description LoginSideBar component is a Material-UI component that displays a full hight styled image that changes with screen width.
+ */
+
 const LoginSideBar = () => {
   const classes = useStyles();
 

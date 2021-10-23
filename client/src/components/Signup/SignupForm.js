@@ -30,6 +30,10 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
+/**
+ * @description SignupForm component is a Material-UI component.
+ */
+
 const SignupForm = ({ onSubmit }) => {
   const [{ username, email, password }, setSignupInputs] = useState({
     username: "",

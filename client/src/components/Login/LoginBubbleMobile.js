@@ -33,6 +33,10 @@ const useStyles = makeStyles((theme) => {
   };
 });
 
+/**
+ * @description LoginBubbleMobile component is a Material-UI component that displays a chat bubble with text below it.
+ */
+
 const LoginBubbleMobile = () => {
   const classes = useStyles();
 

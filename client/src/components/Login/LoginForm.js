@@ -16,6 +16,10 @@ const useStyles = makeStyles(() => {
   };
 });
 
+/**
+ * @description LoginForm component is a Material-UI component that takes username and password.
+ */
+
 const LoginForm = ({ onSubmit }) => {
   const [{ username, password }, setFormInputs] = useState({
     username: "",
