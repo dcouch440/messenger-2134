@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import React from "react";
 
 const useStyles = makeStyles((theme) => {
-  const xsScreen = theme.breakpoints.down("sm");
+  const xsScreen = theme.breakpoints.down("xs");
   const lgScreen = theme.breakpoints.up("lg");
   const smlScreen = theme.breakpoints.down("sm");
 
@@ -15,7 +15,10 @@ const useStyles = makeStyles((theme) => {
       paddingLeft: "87px",
       [smlScreen]: {
         paddingLeft: "0",
+        paddingRight: "0",
         paddingBottom: "25px",
+        display: "flex",
+        alignItems: "center",
       },
     },
     innerBox: {
@@ -24,6 +27,7 @@ const useStyles = makeStyles((theme) => {
       [xsScreen]: {
         display: "flex",
         justifyContent: "center",
+        padding: "0",
       },
     },
     innerInputContainer: {
