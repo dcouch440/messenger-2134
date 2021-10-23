@@ -12,7 +12,8 @@ const useStyles = makeStyles((theme) => {
       width: "100%",
       flexDirection: "column",
       alignItems: "center",
-      marginBottom: "10vh",
+      paddingBottom: "6vh",
+      paddingTop: "6vh",
       [xsScreen]: {
         display: "flex",
       },

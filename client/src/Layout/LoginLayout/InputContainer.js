@@ -12,13 +12,12 @@ const useStyles = makeStyles((theme) => {
     root: {
       flex: 1,
       width: "100%",
+      height: "100%",
       paddingLeft: "87px",
       [smlScreen]: {
         paddingLeft: "0",
         paddingRight: "0",
         paddingBottom: "25px",
-        display: "flex",
-        alignItems: "center",
       },
     },
     innerBox: {
