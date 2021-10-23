@@ -12,13 +12,16 @@ import React from "react";
 import { useHistory } from "react-router";
 
 const useStyles = makeStyles((theme) => {
+  const smlScreen = theme.breakpoints.only("sm");
   const xsScreen = theme.breakpoints.down("xs");
-
   return {
     root: {
       width: "380px",
       height: "66px",
       marginBottom: "36px",
+      [smlScreen]: {
+        width: "300px",
+      },
       [xsScreen]: {
         width: "85vw",
         margin: "0",
