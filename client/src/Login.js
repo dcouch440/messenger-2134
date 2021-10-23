@@ -4,7 +4,7 @@ import {
   TopButtonContainer,
 } from "./Layout/LoginLayout";
 
-import ChangeRouteButton from "./components/ChangeRouteButton";
+import { ChangeRouteButton } from "./components";
 import { LoginForm } from "./components/Login";
 import React from "react";
 import { Redirect } from "react-router-dom";
@@ -12,7 +12,7 @@ import { connect } from "react-redux";
 import { login } from "./store/utils/thunkCreators";
 
 /**
- * @description Login Component is a full page component for users to login
+ * @description Login Component is a Material-UI full page component for users to login
  */
 
 const Login = (props) => {
