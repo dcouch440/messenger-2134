@@ -18,8 +18,8 @@ const useStyles = makeStyles((theme) => {
       [xsScreen]: {
         fontSize: "14px",
         margin: "0",
-        marginTop: "45px",
-        paddingBottom: "15px",
+        paddingTop: "45px",
+        paddingBottom: "10px",
       },
     },
   };

@@ -9,26 +9,33 @@ import React, { useState } from "react";
 
 import PropTypes from "prop-types";
 
-const useStyles = makeStyles(() => ({
-  root: {
-    width: "100%",
-    height: "100%",
-    display: "flex",
-    flexDirection: "column",
-  },
-  form: {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "space-between",
-    flex: 1,
-  },
-  header: {
-    marginBottom: "20px",
-  },
-  createButton: {
-    marginTop: "4px",
-  },
-}));
+const useStyles = makeStyles((theme) => {
+  const smlScreen = theme.breakpoints.down("sm");
+
+  return {
+    root: {
+      width: "100%",
+      height: "100%",
+      display: "flex",
+      flexDirection: "column",
+    },
+    form: {
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "space-between",
+      flex: 1,
+    },
+    header: {
+      marginBottom: "20px",
+    },
+    inputs: {
+      marginBottom: "20px",
+      [smlScreen]: {
+        margin: "0",
+      },
+    },
+  };
+});
 
 /**
  * @description SignupForm component is a Material-UI component.
@@ -71,6 +78,7 @@ const SignupForm = ({ onSubmit }) => {
       <LoginHeader className={classes.header} text="Create an account." />
       <Box>
         <LoginInput
+          className={classes.inputs}
           ariaLabel="username"
           label="Username"
           name="username"
@@ -80,6 +88,7 @@ const SignupForm = ({ onSubmit }) => {
           required
         />
         <LoginInput
+          className={classes.inputs}
           ariaLabel="e-mail address"
           label="E-mail address"
           type="email"
@@ -88,6 +97,7 @@ const SignupForm = ({ onSubmit }) => {
           value={email}
         />
         <LoginInput
+          className={classes.inputs}
           ariaLabel="password"
           label="password"
           ariaDescribedBy="password-input"
@@ -101,6 +111,7 @@ const SignupForm = ({ onSubmit }) => {
           required
         />
         <LoginInput
+          className={classes.inputs}
           ariaLabel="confirm password"
           ariaDescribedBy="password-confirmation"
           label="Confirm Password"
