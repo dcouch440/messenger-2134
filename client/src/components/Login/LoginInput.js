@@ -77,6 +77,7 @@ const LoginInput = ({
   UserInputProps,
   error,
   formHelperText,
+  className,
   ariaDescribedBy,
   ...props
 }) => {
@@ -87,7 +88,7 @@ const LoginInput = ({
   const handleRouteChange = () => history.push("/forgot-password-route");
 
   return (
-    <Box className={classes.root}>
+    <Box className={`${classes.root} ${className}`}>
       <FormControl
         className={classes.formControl}
         required={required}
@@ -133,6 +134,7 @@ LoginInput.propTypes = {
   onChange: PropTypes.func,
   required: PropTypes.bool,
   type: PropTypes.string,
+  className: PropTypes.string,
   value: PropTypes.PropTypes.string,
 };
 
