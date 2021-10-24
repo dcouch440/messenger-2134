@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => {
       },
       [xsScreen]: {
         width: "85vw",
-        margin: "0",
+        marginBottom: "25px",
         height: "56px",
       },
     },
@@ -52,11 +52,14 @@ const useStyles = makeStyles((theme) => {
       ...theme.typography.fontWeightMedium,
       position: "absolute",
       paddingBottom: "10px",
-      bottom: 0,
+      bottom: "0",
       right: "10px",
       fontSize: "12px",
       color: theme.colors.lightBlue,
       fontWeight: "600",
+    },
+    formHelper: {
+      fontSize: "10px",
     },
   };
 });
@@ -74,7 +77,8 @@ const LoginInput = ({
   value,
   type,
   name,
-  UserInputProps,
+  inputProps,
+  autoComplete,
   error,
   formHelperText,
   className,
@@ -88,7 +92,7 @@ const LoginInput = ({
   const handleRouteChange = () => history.push("/forgot-password-route");
 
   return (
-    <Box className={`${classes.root} ${className}`}>
+    <Box className={`${classes.root} ${className ?? ""}`}>
       <FormControl
         className={classes.formControl}
         required={required}
@@ -100,9 +104,10 @@ const LoginInput = ({
           aria-label={ariaLabel}
           label={label}
           name={name}
+          inputProps={inputProps}
+          autoComplete={autoComplete}
           value={value}
           type={type}
-          UserInputProps={UserInputProps}
           aria-describedby={ariaDescribedBy}
           {...props}
         />
@@ -115,7 +120,9 @@ const LoginInput = ({
           </Typography>
         ) : null}
         {formHelperText ? (
-          <FormHelperText id={ariaDescribedBy}>{formHelperText}</FormHelperText>
+          <FormHelperText className={classes.formHelper} id={ariaDescribedBy}>
+            {formHelperText}
+          </FormHelperText>
         ) : null}
       </FormControl>
     </Box>
@@ -123,7 +130,6 @@ const LoginInput = ({
 };
 
 LoginInput.propTypes = {
-  UserInputProps: PropTypes.object,
   ariaDescribedBy: PropTypes.string,
   ariaLabel: PropTypes.string.isRequired,
   error: PropTypes.bool,
@@ -131,7 +137,9 @@ LoginInput.propTypes = {
   formHelperText: PropTypes.string,
   label: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
+  autoComplete: PropTypes.string,
   onChange: PropTypes.func,
+  inputProps: PropTypes.object,
   required: PropTypes.bool,
   type: PropTypes.string,
   className: PropTypes.string,
