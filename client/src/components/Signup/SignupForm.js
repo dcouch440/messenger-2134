@@ -7,10 +7,12 @@ import {
 } from "../Login";
 import React, { useState } from "react";
 
+import { ChangeRouteButton } from "..";
 import PropTypes from "prop-types";
 
 const useStyles = makeStyles((theme) => {
   const smlScreen = theme.breakpoints.down("sm");
+  const xsScreen = theme.breakpoints.down("xs");
 
   return {
     root: {
@@ -23,27 +25,39 @@ const useStyles = makeStyles((theme) => {
       display: "flex",
       flexDirection: "column",
       justifyContent: "space-between",
-      flex: 1,
+      flex: "1",
     },
     header: {
       marginBottom: "20px",
+      [xsScreen]: {
+        margin: "0px",
+      },
     },
     inputs: {
       marginBottom: "20px",
       [smlScreen]: {
-        margin: "0",
+        marginBottom: "25px",
+      },
+    },
+    mobileRouteButton: {
+      display: "none",
+      [xsScreen]: {
+        display: "flex",
+        width: "100%",
+        marginTop: "25px",
+        marginBottom: "25px",
       },
     },
   };
 });
 
 /**
- * @description SignupForm component is a Material-UI component.
+ * @description SignupForm component is a Material-UI form component created for the Signup route page - does not prevent default.
  */
 
 const SignupForm = ({ onSubmit }) => {
-  const [formErrorMessage, setFormErrorMessage] = useState({
-    confirmPassword: "",
+  const [{ passwordError }, setFormErrorMessage] = useState({
+    passwordError: "",
   });
   const [{ username, email, password, confirmPassword }, setSignupInputs] =
     useState({
@@ -53,10 +67,11 @@ const SignupForm = ({ onSubmit }) => {
       confirmPassword: "",
     });
   const classes = useStyles();
-  const hasError = Boolean(formErrorMessage.confirmPassword);
+  const hasPasswordError = Boolean(passwordError);
 
   const handleChange = ({ target }) => {
     const { name, value } = target;
+    // returning self for future errors
     setSignupInputs((prev) => ({
       ...prev,
       [name]: value,
@@ -64,12 +79,16 @@ const SignupForm = ({ onSubmit }) => {
   };
 
   const handleSubmit = (event) => {
+    event.preventDefault();
     if (password !== confirmPassword) {
-      setFormErrorMessage({ confirmPassword: "Passwords must match" });
+      setFormErrorMessage((prev) => ({
+        ...prev,
+        passwordError: "Passwords must match",
+      }));
       return;
     }
 
-    onSubmit(event, { username, email, password, confirmPassword });
+    onSubmit(event, { username, email, password });
   };
 
   return (
@@ -82,6 +101,7 @@ const SignupForm = ({ onSubmit }) => {
           ariaLabel="username"
           label="Username"
           name="username"
+          autoComplete="username"
           type="text"
           onChange={handleChange}
           value={username}
@@ -93,19 +113,22 @@ const SignupForm = ({ onSubmit }) => {
           label="E-mail address"
           type="email"
           name="email"
+          autoComplete="email"
           onChange={handleChange}
           value={email}
+          required
         />
         <LoginInput
           className={classes.inputs}
           ariaLabel="password"
-          label="password"
+          label="Password"
           ariaDescribedBy="password-input"
-          UserInputProps={{ minLength: 6 }}
           type="password"
+          inputProps={{ minLength: 6 }}
           name="password"
-          error={hasError}
-          formHelperText={formErrorMessage.confirmPassword}
+          autoComplete="new-password"
+          error={hasPasswordError}
+          formHelperText={passwordError}
           onChange={handleChange}
           value={password}
           required
@@ -115,11 +138,12 @@ const SignupForm = ({ onSubmit }) => {
           ariaLabel="confirm password"
           ariaDescribedBy="password-confirmation"
           label="Confirm Password"
-          UserInputProps={{ minLength: 6 }}
+          autoComplete="new-password"
           type="password"
+          inputProps={{ minLength: 6 }}
           name="confirmPassword"
-          error={hasError}
-          formHelperText={formErrorMessage.confirmPassword}
+          error={hasPasswordError}
+          formHelperText={passwordError}
           onChange={handleChange}
           value={confirmPassword}
           required
@@ -131,6 +155,13 @@ const SignupForm = ({ onSubmit }) => {
         variant="contained"
         size="large"
         text="Create"
+      />
+      <ChangeRouteButton
+        className={classes.mobileRouteButton}
+        route="/login"
+        sideText="Don't have an account?"
+        buttonText="Create account"
+        variant="text"
       />
     </form>
   );
