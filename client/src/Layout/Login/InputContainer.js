@@ -18,10 +18,11 @@ const useStyles = makeStyles((theme) => {
         paddingLeft: "0",
         paddingRight: "0",
         paddingBottom: "25px",
-        maxHeight: "800px",
       },
       [xsScreen]: {
         padding: "0",
+        minHeight: "100%",
+        display: "flex",
       },
     },
     innerBox: {
@@ -29,10 +30,14 @@ const useStyles = makeStyles((theme) => {
       paddingTop: "85px",
       [xsScreen]: {
         display: "flex",
+        height: "100%",
+        flexDirection: "column",
+        alignItems: "center",
         justifyContent: "center",
         padding: "0",
       },
     },
+    // contains the button on large screens, container fits to button width.
     innerInputContainer: {
       display: "flex",
       flexDirection: "column",
@@ -42,12 +47,15 @@ const useStyles = makeStyles((theme) => {
       [lgScreen]: {
         paddingTop: "20px",
       },
+      [xsScreen]: {
+        height: "unset",
+      },
     },
   };
 });
 
 /**
- * @description InputContainer component is a Material-UI Container.
+ * @description InputContainer component is a Material-UI Container that renders a form - adapts to screen size.
  */
 
 const InputContainer = ({ children }) => {
