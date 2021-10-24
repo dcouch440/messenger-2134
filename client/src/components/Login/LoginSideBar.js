@@ -31,8 +31,8 @@ const useStyles = makeStyles((theme) => {
     sloganAndBubbleBox: {
       position: "absolute",
       top: "190px",
-      right: 0,
-      left: 0,
+      right: "0",
+      left: "0",
       width: "270px",
       margin: "0 auto",
       textAlign: "center",
@@ -64,7 +64,7 @@ const useStyles = makeStyles((theme) => {
 });
 
 /**
- * @description LoginSideBar component is a Material-UI component that displays a full hight styled image that changes with screen width.
+ * @description LoginSideBar component displays a full hight styled image that changes with screen width.
  */
 
 const LoginSideBar = () => {
