@@ -18,8 +18,8 @@ const useStyles = makeStyles((theme) => {
       [xsScreen]: {
         fontSize: "14px",
         margin: "0",
-        paddingTop: "45px",
-        paddingBottom: "10px",
+        paddingTop: "50px",
+        paddingBottom: "25px",
       },
     },
   };
@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => {
 const LoginHeader = ({ text, className }) => {
   const classes = useStyles();
   return (
-    <Typography className={`${classes.root} ${className}`} variant="h2">
+    <Typography className={`${classes.root} ${className ?? ""}`} variant="h2">
       {text}
     </Typography>
   );
