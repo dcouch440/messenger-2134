@@ -12,25 +12,22 @@ import { connect } from "react-redux";
 import { login } from "./store/utils/thunkCreators";
 
 /**
- * @description Login Component is a Material-UI full page component for users to login
+ * @description Login Component is a full page component for users to login.
  */
 
-const Login = (props) => {
-  const { user, login } = props;
+const Login = ({ user, login }) => {
+  if (user.id) {
+    return <Redirect to="/home" />;
+  }
 
   const handleLogin = async (event, { username, password }) => {
     try {
       event.preventDefault();
-
       await login({ username, password });
     } catch (err) {
       console.log(err);
     }
   };
-
-  if (user.id) {
-    return <Redirect to="/home" />;
-  }
 
   return (
     <LoginLayout>
@@ -39,6 +36,7 @@ const Login = (props) => {
           route="/register"
           sideText="Don't have an account?"
           buttonText="Create account"
+          variant="contained"
         />
       </TopButtonContainer>
       <InputContainer>
@@ -48,18 +46,12 @@ const Login = (props) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    user: state.user,
-  };
-};
+const mapStateToProps = ({ user }) => ({ user });
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    login: (credentials) => {
-      dispatch(login(credentials));
-    },
-  };
-};
+const mapDispatchToProps = (dispatch) => ({
+  login: (credentials) => {
+    dispatch(login(credentials));
+  },
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

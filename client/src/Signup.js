@@ -12,11 +12,13 @@ import { connect } from "react-redux";
 import { register } from "./store/utils/thunkCreators";
 
 /**
- * @description Signup Component is a Material-UI full page component for users to signup
+ * @description Signup Component is a full page component for users to signup.
  */
 
-const Signup = (props) => {
-  const { user, register } = props;
+const Signup = ({ user, register }) => {
+  if (user.id) {
+    return <Redirect to="/home" />;
+  }
 
   const handleRegister = async (event, { username, email, password }) => {
     try {
@@ -27,10 +29,6 @@ const Signup = (props) => {
     }
   };
 
-  if (user.id) {
-    return <Redirect to="/home" />;
-  }
-
   return (
     <LoginLayout>
       <TopButtonContainer>
@@ -38,6 +36,7 @@ const Signup = (props) => {
           route="/login"
           sideText="Already have an account?"
           buttonText="Login"
+          variant="contained"
         />
       </TopButtonContainer>
       <InputContainer>
@@ -47,18 +46,12 @@ const Signup = (props) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    user: state.user,
-  };
-};
+const mapStateToProps = ({ user }) => ({ user });
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    register: (credentials) => {
-      dispatch(register(credentials));
-    },
-  };
-};
+const mapDispatchToProps = (dispatch) => ({
+  register: (credentials) => {
+    dispatch(register(credentials));
+  },
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Signup);
