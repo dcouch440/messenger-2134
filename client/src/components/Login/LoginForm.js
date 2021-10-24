@@ -48,13 +48,9 @@ const LoginForm = ({ login }) => {
     }));
   };
 
-  const handleLogin = async (event) => {
-    try {
-      event.preventDefault();
-      await login({ username, password });
-    } catch (err) {
-      console.log(err);
-    }
+  const handleLogin = (event) => {
+    event.preventDefault();
+    login({ username, password });
   };
 
   return (

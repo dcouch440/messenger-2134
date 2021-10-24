@@ -80,20 +80,16 @@ const SignupForm = ({ register }) => {
     }));
   };
 
-  const handleRegister = async (event) => {
-    try {
-      event.preventDefault();
-      if (password !== confirmPassword) {
-        setFormErrorMessage((prev) => ({
-          ...prev,
-          passwordError: "Passwords must match",
-        }));
-        return;
-      }
-      await register({ username, email, password });
-    } catch (err) {
-      console.log(err);
+  const handleRegister = (event) => {
+    event.preventDefault();
+    if (password !== confirmPassword) {
+      setFormErrorMessage((prev) => ({
+        ...prev,
+        passwordError: "Passwords must match",
+      }));
+      return;
     }
+    register({ username, email, password });
   };
 
   return (
