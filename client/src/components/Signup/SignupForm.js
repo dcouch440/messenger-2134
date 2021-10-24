@@ -73,7 +73,6 @@ const SignupForm = ({ register }) => {
 
   const handleChange = ({ target }) => {
     const { name, value } = target;
-    // returning self for future errors
     setSignupInputs((prev) => ({
       ...prev,
       [name]: value,
@@ -83,10 +82,7 @@ const SignupForm = ({ register }) => {
   const handleRegister = (event) => {
     event.preventDefault();
     if (password !== confirmPassword) {
-      setFormErrorMessage((prev) => ({
-        ...prev,
-        passwordError: "Passwords must match",
-      }));
+      setFormErrorMessage({ passwordError: "Passwords must match" });
       return;
     }
     register({ username, email, password });
