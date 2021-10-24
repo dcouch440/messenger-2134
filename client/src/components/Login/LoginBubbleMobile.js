@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme) => {
       width: "100%",
       flexDirection: "column",
       alignItems: "center",
-      paddingTop: "4vh",
+      marginTop: "50px",
       [xsScreen]: {
         display: "flex",
       },
@@ -32,15 +32,19 @@ const useStyles = makeStyles((theme) => {
 });
 
 /**
- * @description LoginBubbleMobile component is a Material-UI component that displays a chat bubble with text below it.
+ * @description LoginBubbleMobile component displays a chat bubble with text below it.
  */
 
 const LoginBubbleMobile = ({ className }) => {
   const classes = useStyles();
 
   return (
-    <Box className={`${classes.root} ${className}`}>
-      <img src={bubbleBlue} className={classes.blueBubble} />
+    <Box className={`${classes.root} ${className ?? ""}`}>
+      <img
+        src={bubbleBlue}
+        className={classes.blueBubble}
+        alt="A blue chat bubble svg with three dots."
+      />
       <Typography className={classes.slogan}>
         Converse with anyone with any language
       </Typography>
