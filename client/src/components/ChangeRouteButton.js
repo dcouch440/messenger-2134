@@ -48,27 +48,36 @@ const useStyles = makeStyles((theme) => {
       [xsScreen]: {
         boxShadow: "none",
         width: "fit-content",
-        padding: 0,
+        height: "fit-content",
+        padding: "0",
       },
     },
   };
 });
 
 /**
- * @description ChangeRouteButton is a button + styled label component that takes a route as a prop to chang routes when pressed.
+ * @description ChangeRouteButton is a button + styled label component that takes a route as a prop to change routes when pressed.
  */
 
-const ChangeRouteButton = ({ route, buttonText, sideText, className }) => {
+const ChangeRouteButton = ({
+  route,
+  buttonText,
+  sideText,
+  className,
+  variant,
+}) => {
   const history = useHistory();
   const classes = useStyles();
 
+  const changeRoute = () => history.push(route);
+
   return (
-    <Box className={`${classes.root} ${className}`}>
+    <Box className={`${classes.root} ${className ?? ""}`}>
       <Typography className={classes.sText}>{sideText}</Typography>
       <Button
         className={classes.routeButton}
-        variant="contained"
-        onClick={() => history.push(route)}
+        variant={variant}
+        onClick={changeRoute}
       >
         {buttonText}
       </Button>
@@ -77,9 +86,9 @@ const ChangeRouteButton = ({ route, buttonText, sideText, className }) => {
 };
 
 ChangeRouteButton.propTypes = {
-  buttonText: PropTypes.string,
+  buttonText: PropTypes.string.isRequired,
   className: PropTypes.string,
-  route: PropTypes.string,
+  route: PropTypes.string.isRequired,
   sideText: PropTypes.string,
 };
 
