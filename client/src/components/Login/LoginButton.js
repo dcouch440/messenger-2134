@@ -23,6 +23,7 @@ const useStyles = makeStyles((theme) => {
       },
       [xsScreen]: {
         width: "100%",
+        marginTop: "0",
       },
     },
     text: {
@@ -33,11 +34,12 @@ const useStyles = makeStyles((theme) => {
 });
 
 /**
- * @description LoginButton component is a large blue Material-UI button.
+ * @description LoginButton component is a large blue Material-UI button - width becomes 100% of its container on xs screens.
  */
 
 const LoginButton = ({ text, onClick, type, variant, className }) => {
   const classes = useStyles();
+
   return (
     <Button
       className={`${classes.root} ${className}`}
