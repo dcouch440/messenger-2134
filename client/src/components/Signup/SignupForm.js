@@ -9,6 +9,8 @@ import React, { useState } from "react";
 
 import { ChangeRouteButton } from "..";
 import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { register } from "../../store/utils/thunkCreators";
 
 const useStyles = makeStyles((theme) => {
   const smlScreen = theme.breakpoints.down("sm");
@@ -52,10 +54,10 @@ const useStyles = makeStyles((theme) => {
 });
 
 /**
- * @description SignupForm component is a Material-UI form component created for the Signup route page - does not prevent default.
+ * @description SignupForm component is a form that takes username, password, password confirm, and email. If passwords do not match formHelperText appears bellow the input to display passwords did not match.
  */
 
-const SignupForm = ({ onSubmit }) => {
+const SignupForm = ({ register }) => {
   const [{ passwordError }, setFormErrorMessage] = useState({
     passwordError: "",
   });
@@ -78,21 +80,24 @@ const SignupForm = ({ onSubmit }) => {
     }));
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    if (password !== confirmPassword) {
-      setFormErrorMessage((prev) => ({
-        ...prev,
-        passwordError: "Passwords must match",
-      }));
-      return;
+  const handleRegister = async (event) => {
+    try {
+      event.preventDefault();
+      if (password !== confirmPassword) {
+        setFormErrorMessage((prev) => ({
+          ...prev,
+          passwordError: "Passwords must match",
+        }));
+        return;
+      }
+      await register({ username, email, password });
+    } catch (err) {
+      console.log(err);
     }
-
-    onSubmit(event, { username, email, password });
   };
 
   return (
-    <form className={classes.form} onSubmit={handleSubmit}>
+    <form className={classes.form} onSubmit={handleRegister}>
       <LoginBubbleMobile />
       <LoginHeader className={classes.header} text="Create an account." />
       <Box>
@@ -168,7 +173,13 @@ const SignupForm = ({ onSubmit }) => {
 };
 
 SignupForm.propTypes = {
-  onSubmit: PropTypes.func.isRequired,
+  register: PropTypes.func.isRequired,
 };
 
-export default SignupForm;
+const mapDispatchToProps = (dispatch) => ({
+  register: (credentials) => {
+    dispatch(register(credentials));
+  },
+});
+
+export default connect(null, mapDispatchToProps)(SignupForm);

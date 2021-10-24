@@ -4,6 +4,8 @@ import { LoginBubbleMobile, LoginButton, LoginHeader, LoginInput } from ".";
 import { ChangeRouteButton } from "..";
 import PropTypes from "prop-types";
 import React from "react";
+import { connect } from "react-redux";
+import { login } from "../../store/utils/thunkCreators";
 import { useState } from "react";
 
 const useStyles = makeStyles((theme) => {
@@ -28,10 +30,10 @@ const useStyles = makeStyles((theme) => {
 });
 
 /**
- * @description LoginForm component is a Material-UI form that takes username and password - does not prevent default.
+ * @description LoginForm component is a form that takes username and password and signs the user in through connect.
  */
 
-const LoginForm = ({ onSubmit }) => {
+const LoginForm = ({ login }) => {
   const [{ username, password }, setFormInputs] = useState({
     username: "",
     password: "",
@@ -46,10 +48,17 @@ const LoginForm = ({ onSubmit }) => {
     }));
   };
 
-  const handleSubmit = (event) => onSubmit(event, { username, password });
+  const handleLogin = async (event) => {
+    try {
+      event.preventDefault();
+      await login({ username, password });
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
-    <form className={classes.root} onSubmit={handleSubmit}>
+    <form className={classes.root} onSubmit={handleLogin}>
       {/* shows on mobile only */}
       <LoginBubbleMobile />
       {/*  example is currently E-mail, project expects Username */}
@@ -97,7 +106,13 @@ const LoginForm = ({ onSubmit }) => {
 };
 
 LoginForm.propTypes = {
-  onSubmit: PropTypes.func.isRequired,
+  login: PropTypes.func.isRequired,
 };
 
-export default LoginForm;
+const mapDispatchToProps = (dispatch) => ({
+  login: (credentials) => {
+    dispatch(login(credentials));
+  },
+});
+
+export default connect(null, mapDispatchToProps)(LoginForm);
