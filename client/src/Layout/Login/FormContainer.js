@@ -55,10 +55,10 @@ const useStyles = makeStyles((theme) => {
 });
 
 /**
- * @description InputContainer component is a Material-UI Container that renders a form - adapts to screen size.
+ * @description FormContainer component is a Material-UI Container that renders a form - adapts to screen size.
  */
 
-const InputContainer = ({ children }) => {
+const FormContainer = ({ children }) => {
   const classes = useStyles();
 
   return (
@@ -70,11 +70,11 @@ const InputContainer = ({ children }) => {
   );
 };
 
-InputContainer.propTypes = {
+FormContainer.propTypes = {
   children: PropTypes.oneOfType([
     PropTypes.node,
     PropTypes.arrayOf(PropTypes.node),
   ]).isRequired,
 };
 
-export default InputContainer;
+export default FormContainer;
