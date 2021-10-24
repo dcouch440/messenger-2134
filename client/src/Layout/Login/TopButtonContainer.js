@@ -23,24 +23,21 @@ const useStyles = makeStyles((theme) => {
         justifyContent: "center",
       },
       [xsScreen]: {
-        justifyContent: "center",
-        padding: "0",
-        margin: "0",
-        height: "65px",
+        display: "none",
       },
     },
   };
 });
 
 /**
- * @description TopButtonContainer renders children in a flex container positioned to the right.
+ * @description TopButtonContainer renders children in a flex container positioned to the right. hides on xs screens.
  */
 
 const TopButtonContainer = ({ children }) => {
   const classes = useStyles();
 
   return (
-    <Container maxWidth={"md"} className={classes.root}>
+    <Container maxWidth="md" className={classes.root}>
       {children}
     </Container>
   );
