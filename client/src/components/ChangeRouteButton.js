@@ -49,7 +49,7 @@ const useStyles = makeStyles((theme) => {
         boxShadow: "none",
         width: "fit-content",
         height: "fit-content",
-        padding: "0",
+        padding: 0,
       },
     },
   };
