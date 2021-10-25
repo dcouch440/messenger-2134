@@ -1,9 +1,13 @@
-import { FormContainer, LoginLayout, TopButtonContainer } from "./Layout/Login";
+import {
+  FormContainer,
+  LoginLayout,
+  TopButtonContainer,
+} from "../Layout/Login";
 
-import { ChangeRouteButton } from "./components";
+import { ChangeRouteButton } from "../components";
 import React from "react";
 import { Redirect } from "react-router-dom";
-import { SignupForm } from "./components/Signup";
+import { SignupForm } from "../components/Signup";
 import { connect } from "react-redux";
 
 /**
