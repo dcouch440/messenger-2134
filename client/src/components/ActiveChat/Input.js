@@ -1,6 +1,7 @@
 import { FilledInput, FormControl } from "@material-ui/core";
 import React, { useState } from "react";
 
+import FileButton from "./FileButton";
 import { connect } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import { postMessage } from "../../store/utils/thunkCreators";
@@ -16,13 +17,14 @@ const useStyles = makeStyles(() => ({
     borderRadius: 8,
     marginBottom: 20,
   },
+  uploadButton: {},
 }));
 
 const Input = (props) => {
   const classes = useStyles();
   const [text, setText] = useState("");
   const { postMessage, otherUser, conversationId, user } = props;
-
+  const [attachments, setAttachments] = useState([]);
   const handleChange = (event) => {
     setText(event.target.value);
   };
@@ -35,22 +37,30 @@ const Input = (props) => {
       recipientId: otherUser.id,
       conversationId,
       sender: conversationId ? null : user,
+      attachments,
     };
     await postMessage(reqBody);
     setText("");
+  };
+
+  const handleAddFile = ({ target }) => {
+    const [{ files }] = target;
+    setAttachments([files]);
+    console.log(files);
   };
 
   return (
     <form className={classes.root} onSubmit={handleSubmit}>
       <FormControl fullWidth hiddenLabel>
         <FilledInput
-          classes={{ root: classes.input }}
+          className={classes.input}
           disableUnderline
           placeholder="Type something..."
           value={text}
           name="text"
           onChange={handleChange}
         />
+        <FileButton onChange={handleAddFile} className={classes.uploadButton} />
       </FormControl>
     </form>
   );
