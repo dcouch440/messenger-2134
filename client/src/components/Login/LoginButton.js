@@ -10,11 +10,11 @@ const useStyles = makeStyles((theme) => {
     root: {
       backgroundColor: theme.colors.lightBlue,
       color: "white",
-      width: "160px",
-      height: "56px",
+      width: 160,
+      height: 56,
       margin: "0 auto",
-      borderRadius: "3px",
-      marginTop: "24px",
+      borderRadius: 3,
+      marginTop: 24,
       boxShadow: "none",
       fontFamily: theme.fonts.monoserrat,
       "&:hover": {
@@ -27,8 +27,7 @@ const useStyles = makeStyles((theme) => {
       },
     },
     text: {
-      fontSize: "16px",
-      lineHeight: "19px",
+      fontSize: 16,
     },
   };
 });

@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme) => {
     sideBanner: {
       position: "relative",
       height: "100%",
-      width: "425px",
+      width: 425,
       backgroundColor: "rgb(134,185,255)",
       background: `
         linear-gradient(0deg, rgba(134,185,255,.85) 0%, rgba(58,141,255,.85) 100%),
@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => {
       backgroundSize: "100%",
       backgroundRepeat: "no-repeat",
       [lgScreen]: {
-        width: "550px",
+        width: 550,
       },
       [xsScreen]: {
         display: "None",
@@ -30,17 +30,17 @@ const useStyles = makeStyles((theme) => {
     },
     sloganAndBubbleBox: {
       position: "absolute",
-      top: "190px",
-      right: "0",
-      left: "0",
-      width: "270px",
+      top: 190,
+      right: 0,
+      left: 0,
+      width: 270,
       margin: "0 auto",
       textAlign: "center",
       [lgScreen]: {
-        top: "260px",
+        top: 260,
       },
       [smlScreen]: {
-        width: "240px",
+        width: 240,
       },
       [xsScreen]: {
         display: "none",
@@ -49,15 +49,15 @@ const useStyles = makeStyles((theme) => {
     sloganText: {
       ...theme.typography.fontWeightMedium,
       color: "white",
-      marginTop: "39px",
-      fontSize: "26px",
+      marginTop: 39,
+      fontSize: 26,
       [smlScreen]: {
-        fontSize: "20px",
+        fontSize: 20,
       },
     },
     bubble: {
       [lgScreen]: {
-        width: "67px",
+        width: 67,
       },
     },
   };

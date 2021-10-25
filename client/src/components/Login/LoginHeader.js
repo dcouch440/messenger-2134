@@ -9,17 +9,17 @@ const useStyles = makeStyles((theme) => {
 
   return {
     root: {
-      fontSize: "26px",
-      fontWeight: "600",
-      marginBottom: "40px",
+      fontSize: 26,
+      fontWeight: 600,
+      marginBottom: 40,
       [lgScreen]: {
-        fontSize: "36px",
+        fontSize: 36,
       },
       [xsScreen]: {
-        fontSize: "14px",
-        margin: "0",
-        paddingTop: "50px",
-        paddingBottom: "25px",
+        fontSize: 14,
+        margin: 0,
+        paddingTop: 50,
+        paddingBottom: 25,
       },
     },
   };

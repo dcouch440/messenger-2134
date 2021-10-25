@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme) => {
       width: "100%",
       flexDirection: "column",
       alignItems: "center",
-      marginTop: "50px",
+      marginTop: 50,
       [xsScreen]: {
         display: "flex",
       },
@@ -20,8 +20,8 @@ const useStyles = makeStyles((theme) => {
     slogan: {
       ...theme.typography.fontWeightMedium,
       color: theme.colors.lightGrey,
-      paddingTop: "15px",
-      fontSize: "12px",
+      paddingTop: 15,
+      fontSize: 12,
       textAlign: "center",
     },
     blueBubble: {

@@ -10,13 +10,13 @@ const useStyles = makeStyles((theme) => {
 
   return {
     root: {
-      width: "351px",
-      height: "54px",
+      width: 351,
+      height: 54,
       alignItems: "center",
       display: "flex",
       justifyContent: "space-between",
       [smlScreen]: {
-        width: "300px",
+        width: 300,
       },
       [xsScreen]: {
         width: "85%",
@@ -24,26 +24,26 @@ const useStyles = makeStyles((theme) => {
       },
     },
     sText: {
-      fontSize: "14px",
+      fontSize: 14,
       color: theme.colors.lightGrey,
       [xsScreen]: {
-        fontSize: "10px",
+        fontSize: 10,
       },
     },
     routeButton: {
       backgroundColor: "transparent",
-      width: "170px",
-      height: "54px",
-      fontSize: "14px",
+      width: 170,
+      height: 54,
+      fontSize: 14,
       boxShadow: "0px 2px 12px rgba(74,106,149,0.2)",
-      borderRadius: "5px",
+      borderRadius: 5,
       color: theme.colors.lightBlue,
       "&:hover": {
         backgroundColor: "#FFFFFF10",
       },
       [smlScreen]: {
-        width: "160px",
-        fontSize: "12px",
+        width: 160,
+        fontSize: 12,
       },
       [xsScreen]: {
         boxShadow: "none",

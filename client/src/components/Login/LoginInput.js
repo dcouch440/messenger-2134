@@ -16,16 +16,16 @@ const useStyles = makeStyles((theme) => {
   const xsScreen = theme.breakpoints.down("xs");
   return {
     root: {
-      width: "380px",
-      height: "66px",
-      marginBottom: "36px",
+      width: 380,
+      height: 66,
+      marginBottom: 36,
       [smlScreen]: {
-        width: "300px",
+        width: 300,
       },
       [xsScreen]: {
         width: "85vw",
-        marginBottom: "25px",
-        height: "56px",
+        marginBottom: 25,
+        height: 56,
       },
     },
     formControl: {
@@ -35,31 +35,31 @@ const useStyles = makeStyles((theme) => {
       backgroundColor: "transparent",
       width: "inherit",
       "& .MuiInputBase-input": {
-        padding: " 10px 5px",
-        lineHeight: "19px",
-        fontSize: "14px",
-        fontWeight: "600",
-        borderBottomWidth: "2px",
+        padding: "10px 5px",
+        lineHeight: 19,
+        fontSize: 14,
+        fontWeight: 600,
+        borderBottomWidth: 2,
       },
       "& .MuiFormLabel-root": {
         color: theme.colors.lightGrey,
-        paddingLeft: "5px",
-        paddingBottom: "10px",
-        fontSize: "14px",
+        paddingLeft: 5,
+        paddingBottom: 10,
+        fontSize: 14,
       },
     },
     forgotPassword: {
       ...theme.typography.fontWeightMedium,
       position: "absolute",
-      paddingBottom: "10px",
-      bottom: "0",
-      right: "10px",
-      fontSize: "12px",
+      paddingBottom: 10,
+      bottom: 0,
+      right: 10,
+      fontSize: 12,
       color: theme.colors.lightBlue,
-      fontWeight: "600",
+      fontWeight: 600,
     },
     formHelper: {
-      fontSize: "10px",
+      fontSize: 10,
     },
   };
 });

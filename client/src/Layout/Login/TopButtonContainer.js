@@ -12,14 +12,14 @@ const useStyles = makeStyles((theme) => {
     root: {
       display: "flex",
       justifyContent: "flex-end",
-      paddingTop: "30px",
-      paddingRight: "36px",
+      paddingTop: 30,
+      paddingRight: 36,
       [lgScreen]: {
-        paddingTop: "65px",
-        paddingRight: "25px",
+        paddingTop: 65,
+        paddingRight: 25,
       },
       [smlScreens]: {
-        paddingRight: "0",
+        paddingRight: 0,
         justifyContent: "center",
       },
       [xsScreen]: {

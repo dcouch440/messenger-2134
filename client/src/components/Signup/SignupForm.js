@@ -27,18 +27,18 @@ const useStyles = makeStyles((theme) => {
       display: "flex",
       flexDirection: "column",
       justifyContent: "space-between",
-      flex: "1",
+      flex: 1,
     },
     header: {
-      marginBottom: "20px",
+      marginBottom: 20,
       [xsScreen]: {
-        margin: "0px",
+        margin: 0,
       },
     },
     inputs: {
-      marginBottom: "20px",
+      marginBottom: 20,
       [smlScreen]: {
-        marginBottom: "25px",
+        marginBottom: 25,
       },
     },
     mobileRouteButton: {
@@ -46,8 +46,8 @@ const useStyles = makeStyles((theme) => {
       [xsScreen]: {
         display: "flex",
         width: "100%",
-        marginTop: "25px",
-        marginBottom: "25px",
+        marginTop: 25,
+        marginBottom: 25,
       },
     },
   };

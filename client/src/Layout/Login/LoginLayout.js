@@ -10,7 +10,7 @@ const useStyles = makeStyles((theme) => {
   return {
     root: {
       height: "100vh",
-      minHeight: "650px",
+      minHeight: 650,
       display: "flex",
       width: "100%",
     },
@@ -19,8 +19,8 @@ const useStyles = makeStyles((theme) => {
       width: "100%",
       flex: "1",
       [xsScreen]: {
-        paddingRight: "0",
-        paddingLeft: "0",
+        paddingRight: 0,
+        paddingLeft: 0,
       },
     },
     children: {

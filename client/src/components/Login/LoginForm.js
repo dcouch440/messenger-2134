@@ -16,14 +16,14 @@ const useStyles = makeStyles((theme) => {
       display: "flex",
       flexDirection: "column",
       justifyContent: "space-between",
-      flex: "1",
+      flex: 1,
     },
     mobileRouteButton: {
       display: "none",
       [xsScreen]: {
         display: "flex",
         width: "100%",
-        marginTop: "25px",
+        marginTop: 25,
       },
     },
   };
