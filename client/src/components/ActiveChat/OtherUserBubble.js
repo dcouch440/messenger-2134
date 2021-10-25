@@ -1,5 +1,6 @@
 import { Avatar, Box, Typography } from "@material-ui/core";
 
+import Attachments from "./Attachments";
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -32,9 +33,9 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const OtherUserBubble = (props) => {
+const OtherUserBubble = ({ text, time, otherUser, attachments }) => {
   const classes = useStyles();
-  const { text, time, otherUser } = props;
+
   return (
     <Box className={classes.root}>
       <Avatar
@@ -50,6 +51,7 @@ const OtherUserBubble = (props) => {
           <Typography className={classes.text}>{text}</Typography>
         </Box>
       </Box>
+      {attachments ? <Attachments attachments={attachments} /> : <></>}
     </Box>
   );
 };
