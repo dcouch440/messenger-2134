@@ -1,4 +1,4 @@
-import { FilledInput, FormControl } from "@material-ui/core";
+import { Box, FilledInput, FormControl } from "@material-ui/core";
 import React, { useState } from "react";
 
 import FileButton from "./FileButton";
@@ -12,12 +12,22 @@ const useStyles = makeStyles(() => ({
     marginTop: 15,
   },
   input: {
+    position: "relative",
     height: 70,
     backgroundColor: "#F4F6FA",
     borderRadius: 8,
     marginBottom: 20,
   },
-  uploadButton: {},
+  uploadButtonBox: {
+    position: "absolute",
+    height: 60,
+    display: "flex",
+    alignItems: "center",
+    right: 10,
+  },
+  uploadButton: {
+    height: 25,
+  },
 }));
 
 const Input = (props) => {
@@ -25,6 +35,7 @@ const Input = (props) => {
   const [text, setText] = useState("");
   const { postMessage, otherUser, conversationId, user } = props;
   const [attachments, setAttachments] = useState([]);
+
   const handleChange = (event) => {
     setText(event.target.value);
   };
@@ -39,14 +50,15 @@ const Input = (props) => {
       sender: conversationId ? null : user,
       attachments,
     };
+
     await postMessage(reqBody);
     setText("");
+    setAttachments([]);
   };
 
   const handleAddFile = ({ target }) => {
-    const [{ files }] = target;
-    setAttachments([files]);
-    console.log(files);
+    const { files } = target;
+    setAttachments((prev) => [...prev, files[0]]);
   };
 
   return (
@@ -60,7 +72,12 @@ const Input = (props) => {
           name="text"
           onChange={handleChange}
         />
-        <FileButton onChange={handleAddFile} className={classes.uploadButton} />
+        <Box className={classes.uploadButtonBox}>
+          <FileButton
+            onChange={handleAddFile}
+            className={classes.uploadButton}
+          />
+        </Box>
       </FormControl>
     </form>
   );
