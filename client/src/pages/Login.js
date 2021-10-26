@@ -5,7 +5,7 @@ import {
 } from "../Layout/Authorize";
 
 import { ChangeRouteButton } from "../components";
-import { LoginForm } from "../components/Login";
+import { LoginForm } from "../components/Authorize";
 import React from "react";
 import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";

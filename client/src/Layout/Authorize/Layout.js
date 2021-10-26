@@ -1,6 +1,6 @@
 import { Box, Container, makeStyles } from "@material-ui/core";
 
-import { LoginSideBar } from "../../components/Login";
+import { LoginSideBar } from "../../components/Authorize";
 import PropTypes from "prop-types";
 import React from "react";
 

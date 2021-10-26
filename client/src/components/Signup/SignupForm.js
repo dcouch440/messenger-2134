@@ -4,7 +4,7 @@ import {
   LoginButton,
   LoginHeader,
   LoginInput,
-} from "../Login";
+} from "../Authorize";
 import React, { useState } from "react";
 
 import { ChangeRouteButton } from "..";
