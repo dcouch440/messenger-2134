@@ -10,9 +10,9 @@ const useStyles = makeStyles(() => ({
   root: {
     justifySelf: "flex-end",
     marginTop: 15,
+    position: "relative",
   },
   input: {
-    position: "relative",
     height: 70,
     backgroundColor: "#F4F6FA",
     borderRadius: 8,
@@ -65,7 +65,7 @@ const Input = (props) => {
     <form className={classes.root} onSubmit={handleSubmit}>
       <FormControl fullWidth hiddenLabel>
         <FilledInput
-          className={classes.input}
+          classes={{ root: classes.input }}
           disableUnderline
           placeholder="Type something..."
           value={text}
