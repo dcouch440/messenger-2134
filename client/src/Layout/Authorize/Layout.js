@@ -33,10 +33,10 @@ const useStyles = makeStyles((theme) => {
 });
 
 /**
- * @description LoginLayout component is a Material-UI component that renders child components with a side banner.
+ * @description Layout component is a Material-UI component that renders child components with a side banner.
  */
 
-const LoginLayout = ({ children }) => {
+const Layout = ({ children }) => {
   const classes = useStyles();
 
   return (
@@ -49,11 +49,11 @@ const LoginLayout = ({ children }) => {
   );
 };
 
-LoginLayout.propTypes = {
+Layout.propTypes = {
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,
   ]).isRequired,
 };
 
-export default LoginLayout;
+export default Layout;
