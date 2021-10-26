@@ -29,8 +29,9 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const SenderBubble = ({ time, text, attachments }) => {
+const SenderBubble = (props) => {
   const classes = useStyles();
+  const { time, text, attachments } = props;
   return (
     <Box className={classes.root}>
       <Typography className={classes.date}>{time}</Typography>
