@@ -2,7 +2,7 @@ import {
   FormContainer,
   LoginLayout,
   TopButtonContainer,
-} from "../Layout/Login";
+} from "../Layout/Authorize";
 
 import { ChangeRouteButton } from "../components";
 import { LoginForm } from "../components/Login";
