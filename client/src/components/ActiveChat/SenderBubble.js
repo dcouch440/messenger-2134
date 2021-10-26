@@ -15,6 +15,7 @@ const useStyles = makeStyles(() => ({
     color: "#BECCE2",
     fontWeight: "bold",
     marginBottom: 5,
+    order: ({ date }) => date,
   },
   text: {
     fontSize: 14,
@@ -26,19 +27,27 @@ const useStyles = makeStyles(() => ({
   bubble: {
     background: "#F4F6FA",
     borderRadius: "10px 10px 0 10px",
+    order: ({ bubble }) => bubble,
   },
 }));
 
 const SenderBubble = (props) => {
-  const classes = useStyles();
-  const { time, text, attachments } = props;
+  const { time, text, attachments, messageOrder } = props;
+  const classes = useStyles(messageOrder);
   return (
     <Box className={classes.root}>
       <Typography className={classes.date}>{time}</Typography>
       <Box className={classes.bubble}>
         <Typography className={classes.text}>{text}</Typography>
       </Box>
-      {attachments ? <Attachments attachments={attachments} /> : <></>}
+      {attachments ? (
+        <Attachments
+          order={messageOrder.attachments}
+          attachments={attachments}
+        />
+      ) : (
+        <></>
+      )}
     </Box>
   );
 };

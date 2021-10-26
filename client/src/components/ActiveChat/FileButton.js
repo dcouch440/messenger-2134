@@ -1,5 +1,6 @@
 import { Fab, makeStyles } from "@material-ui/core";
 
+import { FileCopyOutlined } from "@material-ui/icons";
 import PropTypes from "prop-types";
 import React from "react";
 
@@ -34,7 +35,7 @@ const FileButton = ({ onChange, className }) => {
         component="span"
         aria-label="add"
       >
-        <div />
+        <FileCopyOutlined />
       </Fab>
     </label>
   );
