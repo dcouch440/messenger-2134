@@ -32,10 +32,10 @@ const useStyles = makeStyles((theme) => {
 });
 
 /**
- * @description LoginBubbleMobile component displays a chat bubble with text below it.
+ * @description BubbleMobile component displays a chat bubble with text below it.
  */
 
-const LoginBubbleMobile = ({ className }) => {
+const BubbleMobile = ({ className }) => {
   const classes = useStyles();
 
   return (
@@ -52,4 +52,4 @@ const LoginBubbleMobile = ({ className }) => {
   );
 };
 
-export default LoginBubbleMobile;
+export default BubbleMobile;

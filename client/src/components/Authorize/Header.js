@@ -26,10 +26,10 @@ const useStyles = makeStyles((theme) => {
 });
 
 /**
- * @description LoginHeader component displays an Material-UI Typography h2 element that increases in size for large screens.
+ * @description Header component displays an Material-UI Typography h2 element that increases in size for large screens.
  */
 
-const LoginHeader = ({ text, className }) => {
+const Header = ({ text, className }) => {
   const classes = useStyles();
   return (
     <Typography className={`${classes.root} ${className ?? ""}`} variant="h2">
@@ -38,9 +38,9 @@ const LoginHeader = ({ text, className }) => {
   );
 };
 
-LoginHeader.propTypes = {
+Header.propTypes = {
   className: PropTypes.string,
   text: PropTypes.string.isRequired,
 };
 
-export default LoginHeader;
+export default Header;
