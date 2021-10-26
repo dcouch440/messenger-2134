@@ -58,7 +58,7 @@ const Input = (props) => {
 
   const handleAddFile = ({ target }) => {
     const { files } = target;
-    setAttachments((prev) => [...prev, files[0]]);
+    setAttachments((prev) => [...prev, ...files]);
   };
 
   return (

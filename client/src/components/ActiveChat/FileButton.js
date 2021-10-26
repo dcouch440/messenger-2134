@@ -2,18 +2,12 @@ import { Fab, makeStyles } from "@material-ui/core";
 
 import PropTypes from "prop-types";
 import React from "react";
-import copyIcon from "../../assets/svg/copy icon.svg";
 
 // #C9D4E2
 const useStyles = makeStyles(() => ({
   fab: {
-    color: "transparent",
-    backgroundColor: "transparent",
     outline: "none",
     boxShadow: "none",
-    "&:hover": {
-      backgroundColor: "#fffff20",
-    },
   },
   icon: {
     width: "60%",
@@ -32,6 +26,7 @@ const FileButton = ({ onChange, className }) => {
         name="upload-photo"
         type="file"
         onChange={onChange}
+        multiple
       />
       <Fab
         className={classes.fab}
@@ -39,7 +34,7 @@ const FileButton = ({ onChange, className }) => {
         component="span"
         aria-label="add"
       >
-        <img className={classes.icon} src={copyIcon} alt="a copy icon" />
+        <div />
       </Fab>
     </label>
   );
