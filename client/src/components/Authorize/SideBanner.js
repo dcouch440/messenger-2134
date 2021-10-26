@@ -49,7 +49,7 @@ const useStyles = makeStyles((theme) => {
     sloganText: {
       ...theme.typography.fontWeightMedium,
       color: "white",
-      marginTop: 39,
+      marginTop: theme.spacing(3),
       fontSize: 26,
       [smlScreen]: {
         fontSize: 20,

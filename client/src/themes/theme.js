@@ -28,4 +28,5 @@ export const theme = createMuiTheme({
   fonts: {
     monoserrat: "Montserrat, sans-serif",
   },
+  spacing: 12,
 });

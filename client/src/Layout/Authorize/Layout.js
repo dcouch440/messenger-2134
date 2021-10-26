@@ -1,8 +1,8 @@
 import { Box, Container, makeStyles } from "@material-ui/core";
 
-import { LoginSideBar } from "../../components/Authorize";
 import PropTypes from "prop-types";
 import React from "react";
+import { SideBanner } from "../../components/Authorize";
 
 const useStyles = makeStyles((theme) => {
   const xsScreen = theme.breakpoints.down("xs");
@@ -21,6 +21,8 @@ const useStyles = makeStyles((theme) => {
       [xsScreen]: {
         paddingRight: 0,
         paddingLeft: 0,
+        display: "flex",
+        alignItems: "center",
       },
     },
     children: {
@@ -28,6 +30,9 @@ const useStyles = makeStyles((theme) => {
       height: "100%",
       display: "flex",
       flexDirection: "column",
+      [xsScreen]: {
+        height: "unset",
+      },
     },
   };
 });
@@ -41,7 +46,7 @@ const Layout = ({ children }) => {
 
   return (
     <Box className={classes.root}>
-      <LoginSideBar />
+      <SideBanner />
       <Container className={classes.childrenOuter}>
         <Box className={classes.children}>{children}</Box>
       </Container>

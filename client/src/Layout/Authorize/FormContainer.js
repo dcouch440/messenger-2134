@@ -13,21 +13,21 @@ const useStyles = makeStyles((theme) => {
       flex: 1,
       width: "100%",
       height: "100%",
-      paddingLeft: 63,
       [smlScreen]: {
         paddingLeft: 0,
         paddingRight: 0,
-        paddingBottom: 25,
+        paddingBottom: theme.spacing(2),
       },
       [xsScreen]: {
         padding: 0,
-        minHeight: "100%",
         display: "flex",
       },
     },
     innerBox: {
       width: "100%",
-      paddingTop: 85,
+      paddingTop: theme.spacing(7),
+      display: "flex",
+      justifyContent: "center",
       [xsScreen]: {
         display: "flex",
         height: "100%",
@@ -45,7 +45,7 @@ const useStyles = makeStyles((theme) => {
       justifyContent: "space-between",
       width: "fit-content",
       [lgScreen]: {
-        paddingTop: "20px",
+        paddingTop: theme.spacing(2),
       },
       [xsScreen]: {
         height: "unset",

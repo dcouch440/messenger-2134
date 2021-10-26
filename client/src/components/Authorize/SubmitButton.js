@@ -12,9 +12,8 @@ const useStyles = makeStyles((theme) => {
       color: "white",
       width: 160,
       height: 56,
-      margin: "0 auto",
       borderRadius: 3,
-      marginTop: 24,
+      marginTop: theme.spacing(2),
       boxShadow: "none",
       fontFamily: theme.fonts.monoserrat,
       "&:hover": {

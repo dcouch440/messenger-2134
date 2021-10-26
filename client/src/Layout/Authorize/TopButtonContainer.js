@@ -12,18 +12,19 @@ const useStyles = makeStyles((theme) => {
     root: {
       display: "flex",
       justifyContent: "flex-end",
-      paddingTop: 30,
-      paddingRight: 36,
+      marginTop: theme.spacing(2),
+      paddingRight: theme.spacing(2),
       [lgScreen]: {
-        paddingTop: 65,
-        paddingRight: 25,
+        paddingTop: theme.spacing(5),
+        paddingRight: theme.spacing(2),
       },
       [smlScreens]: {
         paddingRight: 0,
         justifyContent: "center",
       },
       [xsScreen]: {
-        display: "none",
+        padding: 0,
+        order: 2,
       },
     },
   };

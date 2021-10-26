@@ -52,6 +52,11 @@ const useStyles = makeStyles((theme) => {
         padding: 0,
       },
     },
+    [xsScreen]: {
+      width: "100%",
+      marginTop: theme.spacing(2),
+      marginBottom: theme.spacing(2),
+    },
   };
 });
 

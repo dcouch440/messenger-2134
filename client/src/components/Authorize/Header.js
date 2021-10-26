@@ -11,15 +11,15 @@ const useStyles = makeStyles((theme) => {
     root: {
       fontSize: 26,
       fontWeight: 600,
-      marginBottom: 40,
+      marginBottom: theme.spacing(3),
       [lgScreen]: {
         fontSize: 36,
       },
       [xsScreen]: {
         fontSize: 14,
         margin: 0,
-        paddingTop: 50,
-        paddingBottom: 25,
+        paddingTop: theme.spacing(4),
+        paddingBottom: theme.spacing(2),
       },
     },
   };

@@ -1,6 +1,6 @@
-export { default as LoginButton } from "./SubmitButton";
-export { default as LoginHeader } from "./Header";
-export { default as LoginInput } from "./Input";
-export { default as LoginForm } from "./LoginForm";
-export { default as LoginBubbleMobile } from "./BubbleMobile";
-export { default as LoginSideBar } from "./SideBanner";
+export { default as SubmitButton } from "./SubmitButton";
+export { default as Header } from "./Header";
+export { default as Input } from "./Input";
+export { default as Form } from "./Form";
+export { default as BubbleMobile } from "./BubbleMobile";
+export { default as SideBanner } from "./SideBanner";

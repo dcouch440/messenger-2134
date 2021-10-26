@@ -1,16 +1,10 @@
 import { Box, makeStyles } from "@material-ui/core";
-import {
-  LoginBubbleMobile,
-  LoginButton,
-  LoginHeader,
-  LoginInput,
-} from "../Authorize";
+import { BubbleMobile, Header, Input, SubmitButton } from "../Authorize";
 import React, { useState } from "react";
+import { login, register } from "../../store/utils/thunkCreators";
 
-import { ChangeRouteButton } from "..";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { register } from "../../store/utils/thunkCreators";
 
 const useStyles = makeStyles((theme) => {
   const smlScreen = theme.breakpoints.down("sm");
@@ -22,6 +16,7 @@ const useStyles = makeStyles((theme) => {
       height: "100%",
       display: "flex",
       flexDirection: "column",
+      alignItems: "center",
     },
     form: {
       display: "flex",
@@ -30,15 +25,20 @@ const useStyles = makeStyles((theme) => {
       flex: 1,
     },
     header: {
-      marginBottom: 20,
+      marginBottom: theme.spacing(2),
       [xsScreen]: {
         margin: 0,
       },
     },
+    inputBox: {
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+    },
     inputs: {
-      marginBottom: 20,
+      marginBottom: theme.spacing(2),
       [smlScreen]: {
-        marginBottom: 25,
+        marginBottom: theme.spacing(2),
       },
     },
     mobileRouteButton: {
@@ -46,18 +46,19 @@ const useStyles = makeStyles((theme) => {
       [xsScreen]: {
         display: "flex",
         width: "100%",
-        marginTop: 25,
-        marginBottom: 25,
+        marginTop: theme.spacing(2),
+        marginBottom: theme.spacing(2),
       },
     },
   };
 });
 
 /**
- * @description SignupForm component is a form that takes username, password, password confirm, and email. If passwords do not match formHelperText appears bellow the input to display passwords did not match.
+ * @description Form component is a form that takes username, password, password confirm, and email. use withSignup to create a signup page.
+ * If passwords do not match formHelperText appears bellow the input to display passwords did not match.
  */
 
-const SignupForm = ({ register }) => {
+const Form = ({ register, login, withSignup }) => {
   const [{ passwordError }, setFormErrorMessage] = useState({
     passwordError: "",
   });
@@ -70,6 +71,8 @@ const SignupForm = ({ register }) => {
     });
   const classes = useStyles();
   const hasPasswordError = Boolean(passwordError);
+  const headerText = `${withSignup ? "Create an account." : "Welcome Back!"}`;
+  const submitButtonText = withSignup ? "Create" : "Login";
 
   const handleChange = ({ target }) => {
     const { name, value } = target;
@@ -81,19 +84,26 @@ const SignupForm = ({ register }) => {
 
   const handleRegister = (event) => {
     event.preventDefault();
+
+    if (!withSignup) {
+      login({ username, password });
+      return;
+    }
+
     if (password !== confirmPassword) {
       setFormErrorMessage({ passwordError: "Passwords must match" });
       return;
     }
+
     register({ username, email, password });
   };
 
   return (
     <form className={classes.form} onSubmit={handleRegister}>
-      <LoginBubbleMobile />
-      <LoginHeader className={classes.header} text="Create an account." />
-      <Box>
-        <LoginInput
+      <BubbleMobile />
+      <Header className={classes.header} text={headerText} />
+      <Box className={classes.inputBox}>
+        <Input
           className={classes.inputs}
           ariaLabel="username"
           label="Username"
@@ -104,18 +114,20 @@ const SignupForm = ({ register }) => {
           value={username}
           required
         />
-        <LoginInput
-          className={classes.inputs}
-          ariaLabel="e-mail address"
-          label="E-mail address"
-          type="email"
-          name="email"
-          autoComplete="email"
-          onChange={handleChange}
-          value={email}
-          required
-        />
-        <LoginInput
+        {withSignup && (
+          <Input
+            className={classes.inputs}
+            ariaLabel="e-mail address"
+            label="E-mail address"
+            type="email"
+            name="email"
+            autoComplete="email"
+            onChange={handleChange}
+            value={email}
+            required
+          />
+        )}
+        <Input
           className={classes.inputs}
           ariaLabel="password"
           label="Password"
@@ -128,43 +140,38 @@ const SignupForm = ({ register }) => {
           formHelperText={passwordError}
           onChange={handleChange}
           value={password}
+          forgot={withSignup ? false : true}
           required
         />
-        <LoginInput
-          className={classes.inputs}
-          ariaLabel="confirm password"
-          ariaDescribedBy="password-confirmation"
-          label="Confirm Password"
-          autoComplete="new-password"
-          type="password"
-          inputProps={{ minLength: 6 }}
-          name="confirmPassword"
-          error={hasPasswordError}
-          formHelperText={passwordError}
-          onChange={handleChange}
-          value={confirmPassword}
-          required
+        {withSignup && (
+          <Input
+            className={classes.inputs}
+            ariaLabel="confirm password"
+            ariaDescribedBy="password-confirmation"
+            label="Confirm Password"
+            autoComplete="new-password"
+            type="password"
+            inputProps={{ minLength: 6 }}
+            name="confirmPassword"
+            error={hasPasswordError}
+            formHelperText={passwordError}
+            onChange={handleChange}
+            value={confirmPassword}
+            required
+          />
+        )}
+        <SubmitButton
+          type="submit"
+          variant="contained"
+          size="large"
+          text={submitButtonText}
         />
       </Box>
-      <LoginButton
-        className={classes.createButton}
-        type="submit"
-        variant="contained"
-        size="large"
-        text="Create"
-      />
-      <ChangeRouteButton
-        className={classes.mobileRouteButton}
-        route="/login"
-        sideText="Already have an account?"
-        buttonText="Login"
-        variant="text"
-      />
     </form>
   );
 };
 
-SignupForm.propTypes = {
+Form.propTypes = {
   register: PropTypes.func.isRequired,
 };
 
@@ -172,6 +179,9 @@ const mapDispatchToProps = (dispatch) => ({
   register: (credentials) => {
     dispatch(register(credentials));
   },
+  login: (credentials) => {
+    dispatch(login(credentials));
+  },
 });
 
-export default connect(null, mapDispatchToProps)(SignupForm);
+export default connect(null, mapDispatchToProps)(Form);
