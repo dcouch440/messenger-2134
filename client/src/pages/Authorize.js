@@ -17,7 +17,9 @@ const Authorize = ({ user, withSignup }) => {
   }
 
   const routeText = withSignup ? "/login" : "/register";
-  const sideText = `${withSignup ? "Already" : "Don't have an account?"}`;
+  const sideText = `${
+    withSignup ? "Already have an account?" : "Don't have an account?"
+  }`;
   const buttonText = `${withSignup ? "Login" : "Create account"}`;
 
   return (
