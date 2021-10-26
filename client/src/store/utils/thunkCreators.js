@@ -93,53 +93,68 @@ const sendMessage = (data, body) => {
   });
 };
 
-// message format to send: {recipientId, text, conversationId}
+// message format to send: {recipientId, text, conversationId, sender, attachments}
 // conversationId will be set to null if its a brand new conversation
 export const postMessage = (body) => async (dispatch) => {
   try {
     const { attachments, ...messageData } = body;
 
-    // if any attachments are in the present, send them to cloudinary and return the url.
-    const imageUrls = await Promise.all(
-      attachments.map(async (attachment) => {
-        try {
-          const cloudName = process.env.REACT_APP_CLOUDINARY_CLOUD_NAME;
-          const url = `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`;
-          const formData = new FormData();
+    // if any attachments are present, send them to cloudinary and return the url.
+    const imageRequests = attachments.map(async (attachment) => {
+      try {
+        const cloudName = process.env.REACT_APP_CLOUDINARY_CLOUD_NAME;
+        const url = `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`;
+        const formData = new FormData();
 
-          formData.append("file", attachment);
-          formData.append(
-            "upload_preset",
-            process.env.REACT_APP_CLOUDINARY_UPLOAD_PRESET
-          );
+        formData.append("file", attachment);
+        formData.append(
+          "upload_preset",
+          process.env.REACT_APP_CLOUDINARY_UPLOAD_PRESET
+        );
 
-          const response = await fetch(url, {
-            method: "POST",
-            body: formData,
+        const response = await fetch(url, {
+          method: "POST",
+          body: formData,
+        });
+
+        console.log(response);
+
+        // if response is not ok, return null to be filtered out later.
+        if (!response.ok) {
+          console.log({
+            message: response.statusText,
+            status: response.ok,
           });
-          const { secure_url } = await response.json();
-
-          return secure_url;
-        } catch (error) {
-          console.error(error);
+          return null;
         }
-      })
-    );
 
-    const newBody = {
+        const { secure_url } = await response.json();
+
+        return secure_url;
+      } catch (error) {
+        console.error(error);
+      }
+    });
+
+    // removing non url's values to prevent server store / reject of values we dont want. the successful images can still be sent.
+    const imageUrls = await Promise.all(imageRequests);
+
+    const bodyWithAttachments = {
       ...messageData,
       attachments: imageUrls,
     };
 
-    const data = await saveMessage(newBody);
+    const messageResponse = await saveMessage(bodyWithAttachments);
 
     if (!messageData.conversationId) {
-      dispatch(addConversation(messageData.recipientId, data.message));
+      dispatch(
+        addConversation(messageData.recipientId, messageResponse.message)
+      );
     } else {
-      dispatch(setNewMessage(data.message));
+      dispatch(setNewMessage(messageResponse.message));
     }
 
-    sendMessage(data, newBody);
+    sendMessage(messageResponse, bodyWithAttachments);
   } catch (error) {
     console.error(error);
   }
