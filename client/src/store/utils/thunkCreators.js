@@ -93,7 +93,7 @@ const sendMessage = (data, body) => {
   });
 };
 
-// message format to send: {recipientId, text, conversationId, sender, attachments}
+// message format to send to postgres: {recipientId, text, conversationId, sender, attachments[]}
 // conversationId will be set to null if its a brand new conversation
 export const postMessage = (body) => async (dispatch) => {
   try {
@@ -102,22 +102,16 @@ export const postMessage = (body) => async (dispatch) => {
     // if any attachments are present, send them to cloudinary and return the url.
     const imageRequests = attachments.map(async (attachment) => {
       try {
-        const cloudName = process.env.REACT_APP_CLOUDINARY_CLOUD_NAME;
-        const url = `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`;
+        const url = `https://api.cloudinary.com/v1_1/dyc2vfni0/image/upload`;
         const formData = new FormData();
 
         formData.append("file", attachment);
-        formData.append(
-          "upload_preset",
-          process.env.REACT_APP_CLOUDINARY_UPLOAD_PRESET
-        );
+        formData.append("upload_preset", "i014dxt6");
 
         const response = await fetch(url, {
           method: "POST",
           body: formData,
         });
-
-        console.log(response);
 
         // if response is not ok, return null to be filtered out later.
         if (!response.ok) {
@@ -136,13 +130,22 @@ export const postMessage = (body) => async (dispatch) => {
       }
     });
 
-    // removing non url's values to prevent server store / reject of values we dont want. the successful images can still be sent.
     const imageUrls = await Promise.all(imageRequests);
+
+    // removing non url's values to prevent server store / reject of values we dont want. the successful images can still be sent.
+    const validUrls = imageUrls.filter((url) => url !== undefined);
+
+    // exit if nothing was successful.
+    if (!messageData.text && !validUrls.length) {
+      throw new Error("No content to send");
+    }
 
     const bodyWithAttachments = {
       ...messageData,
       attachments: imageUrls,
     };
+
+    console.log(messageData);
 
     const messageResponse = await saveMessage(bodyWithAttachments);
 

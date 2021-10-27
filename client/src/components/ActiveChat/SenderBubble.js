@@ -1,53 +1,85 @@
-import { Box, Typography } from "@material-ui/core";
+import { Avatar, Box, Typography } from "@material-ui/core";
 
 import Attachments from "./Attachments";
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
   root: {
+    display: ({ isOtherUser }) => (isOtherUser ? "flex" : "initial"),
+    marginTop: theme.spacing(2),
+  },
+  messageContainer: {
     display: "flex",
     flexDirection: "column",
-    alignItems: "flex-end",
+    alignItems: ({ isOtherUser }) => (isOtherUser ? "flex-start" : "flex-end"),
+  },
+  avatar: {
+    marginRight: theme.spacing(0.5),
   },
   date: {
     fontSize: 11,
     color: "#BECCE2",
     fontWeight: "bold",
-    marginBottom: 5,
+    marginBottom: theme.spacing(0.5),
     order: ({ date }) => date,
   },
   text: {
-    fontSize: 14,
-    color: "#91A3C0",
+    fontSize: theme.typography.fontSize,
+    color: ({ isOtherUser }) => (isOtherUser ? "#FFFFFF" : "#91A3C0"),
     letterSpacing: -0.2,
     padding: 8,
     fontWeight: "bold",
   },
   bubble: {
-    background: "#F4F6FA",
-    borderRadius: "10px 10px 0 10px",
+    backgroundImage: ({ isOtherUser }) =>
+      isOtherUser && theme.palette.darkBlueGradient.main,
+    background: theme.palette.dimGrey.main,
+    marginBottom: theme.spacing(0.5),
+    borderRadius: ({ isOtherUser }) =>
+      isOtherUser ? "0 10px 10px 10px" : "10px 10px 0 10px",
     order: ({ bubble }) => bubble,
   },
 }));
 
-const SenderBubble = (props) => {
-  const { time, text, attachments, messageOrder } = props;
-  const classes = useStyles(messageOrder);
+const SenderBubble = ({
+  otherUser,
+  time,
+  text,
+  attachments,
+  messageOrder,
+  isOtherUser,
+}) => {
+  const classes = useStyles({ ...messageOrder, isOtherUser });
   return (
     <Box className={classes.root}>
-      <Typography className={classes.date}>{time}</Typography>
-      <Box className={classes.bubble}>
-        <Typography className={classes.text}>{text}</Typography>
-      </Box>
-      {attachments ? (
-        <Attachments
-          order={messageOrder.attachments}
-          attachments={attachments}
-        />
+      {isOtherUser ? (
+        <Box>
+          <Avatar
+            alt={otherUser.username}
+            src={otherUser.photoUrl}
+            className={classes.avatar}
+          />
+        </Box>
       ) : (
         <></>
       )}
+      <Box className={classes.messageContainer}>
+        <Typography className={classes.date}>
+          {isOtherUser && otherUser.username} {time}
+        </Typography>
+        <Box className={classes.bubble}>
+          <Typography className={classes.text}>{text}</Typography>
+        </Box>
+        {attachments ? (
+          <Attachments
+            order={messageOrder.attachments}
+            attachments={attachments}
+          />
+        ) : (
+          <></>
+        )}
+      </Box>
     </Box>
   );
 };
