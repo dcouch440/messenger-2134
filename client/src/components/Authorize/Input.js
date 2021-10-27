@@ -51,7 +51,7 @@ const useStyles = makeStyles((theme) => {
       right: theme.spacing(1),
       fontSize: theme.typography.fontSize,
       color: theme.palette.primary.main,
-      fontWeight: 600,
+      fontWeight: theme.typography.fontWeightBold,
       "&:hover": {
         cursor: "pointer",
       },

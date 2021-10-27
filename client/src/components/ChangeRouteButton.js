@@ -25,9 +25,6 @@ const useStyles = makeStyles((theme) => {
     },
     sText: {
       fontSize: theme.typography.fontSize,
-      [xsScreen]: {
-        fontSize: 10,
-      },
     },
     routeButton: {
       backgroundColor: "transparent",

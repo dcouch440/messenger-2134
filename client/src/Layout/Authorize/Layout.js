@@ -1,4 +1,5 @@
 import { Box, Container, makeStyles } from "@material-ui/core";
+import { FormContainer, TopButtonContainer } from ".";
 
 import PropTypes from "prop-types";
 import React from "react";
@@ -41,14 +42,17 @@ const useStyles = makeStyles((theme) => {
  * @description Layout component is a Material-UI component that renders child components with a side banner.
  */
 
-const Layout = ({ children }) => {
+const Layout = ({ topButton, children }) => {
   const classes = useStyles();
 
   return (
     <Box className={classes.root}>
       <SideBanner />
       <Container className={classes.childrenOuter}>
-        <Box className={classes.children}>{children}</Box>
+        <Box className={classes.children}>
+          <TopButtonContainer>{topButton}</TopButtonContainer>
+          <FormContainer>{children}</FormContainer>
+        </Box>
       </Container>
     </Box>
   );

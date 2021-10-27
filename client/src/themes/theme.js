@@ -5,6 +5,7 @@ export const theme = createMuiTheme({
     fontFamily: "Open Sans, sans-serif",
     fontSize: 14,
     fontSizeXL: 36,
+    fontWeightMedium: 600,
     h2: {
       fontWeight: 600,
       fontSize: 26,
@@ -13,7 +14,7 @@ export const theme = createMuiTheme({
       textTransform: "none",
       letterSpacing: 0,
       fontWeight: 600,
-      monoserrat: "Montserrat, sans-serif",
+      fontFamily: "Montserrat, sans-serif",
     },
   },
   overrides: {

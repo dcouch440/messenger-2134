@@ -21,8 +21,8 @@ const useStyles = makeStyles((theme) => {
     form: {
       display: "flex",
       flexDirection: "column",
-      justifyContent: "space-between",
       flex: 1,
+      justifyContent: "space-between",
     },
     header: {
       marginBottom: theme.spacing(2),
@@ -58,10 +58,7 @@ const useStyles = makeStyles((theme) => {
  * If passwords do not match formHelperText appears bellow the input to display passwords did not match.
  */
 
-const Form = ({ register, login, withSignup }) => {
-  const [{ passwordError }, setFormErrorMessage] = useState({
-    passwordError: "",
-  });
+const Form = ({ handleAuth, withSignup, error }) => {
   const [{ username, email, password, confirmPassword }, setSignupInputs] =
     useState({
       username: "",
@@ -70,7 +67,7 @@ const Form = ({ register, login, withSignup }) => {
       confirmPassword: "",
     });
   const classes = useStyles();
-  const hasPasswordError = Boolean(passwordError);
+  const hasPasswordError = Boolean(error);
   const headerText = withSignup ? "Create an account." : "Welcome Back!";
   const submitButtonText = withSignup ? "Create" : "Login";
 
@@ -82,24 +79,13 @@ const Form = ({ register, login, withSignup }) => {
     }));
   };
 
-  const handleAuth = (event) => {
-    event.preventDefault();
-
-    if (!withSignup) {
-      login({ username, password });
-      return;
-    }
-
-    if (password !== confirmPassword) {
-      setFormErrorMessage({ passwordError: "Passwords must match" });
-      return;
-    }
-
-    register({ username, email, password });
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    handleAuth({ username, password, email, confirmPassword });
   };
 
   return (
-    <form className={classes.form} onSubmit={handleAuth}>
+    <form className={classes.form} onSubmit={handleSubmit}>
       <BubbleMobile />
       <Header className={classes.header} text={headerText} />
       <Box className={classes.inputBox}>
@@ -139,7 +125,7 @@ const Form = ({ register, login, withSignup }) => {
           name="password"
           autoComplete="new-password"
           error={hasPasswordError}
-          formHelperText={passwordError}
+          formHelperText={error}
           onChange={handleChange}
           value={password}
           forgot={withSignup ? false : true}
@@ -156,7 +142,7 @@ const Form = ({ register, login, withSignup }) => {
             inputProps={{ minLength: 6 }}
             name="confirmPassword"
             error={hasPasswordError}
-            formHelperText={passwordError}
+            formHelperText={error}
             onChange={handleChange}
             value={confirmPassword}
             required

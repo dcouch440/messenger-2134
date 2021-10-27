@@ -2,7 +2,8 @@ import { Home, SnackbarError } from "./components";
 import React, { useEffect, useState } from "react";
 import { Route, Switch, withRouter } from "react-router-dom";
 
-import { Authorize } from "./pages";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
 import { connect } from "react-redux";
 import { fetchUser } from "./store/utils/thunkCreators";
 
@@ -41,14 +42,12 @@ const Routes = (props) => {
         />
       )}
       <Switch>
-        <Route path="/login" component={Authorize} />
-        <Route path="/register" component={() => <Authorize withSignup />} />
+        <Route path="/login" component={Login} />
+        <Route path="/register" component={Signup} />
         <Route
           exact
           path="/"
-          render={(props) =>
-            props.user?.id ? <Home /> : <Authorize withSignup />
-          }
+          render={(props) => (props.user?.id ? <Home /> : <Signup />)}
         />
         <Route path="/home" component={Home} />
       </Switch>

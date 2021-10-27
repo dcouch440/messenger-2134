@@ -14,6 +14,7 @@ const useStyles = makeStyles((theme) => {
       borderRadius: 3,
       marginTop: theme.spacing(2),
       boxShadow: "none",
+      fontWeight: theme.typography.fontWeightMedium,
       "&:hover": {
         backgroundColor: "transparent",
         color: theme.palette.primary.main,
