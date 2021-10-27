@@ -19,6 +19,5 @@ yarn-debug.log*
 yarn-error.log*
 
 server/.env
-client/.env
 client/cypress/videos
 client/cypress/screenshots
