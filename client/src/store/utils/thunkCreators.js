@@ -145,8 +145,6 @@ export const postMessage = (body) => async (dispatch) => {
       attachments: imageUrls,
     };
 
-    console.log(messageData);
-
     const messageResponse = await saveMessage(bodyWithAttachments);
 
     if (!messageData.conversationId) {
