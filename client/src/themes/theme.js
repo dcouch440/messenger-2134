@@ -4,6 +4,7 @@ export const theme = createMuiTheme({
   typography: {
     fontFamily: "Open Sans, sans-serif",
     fontSize: 14,
+    fontSizeLg: 26,
     fontSizeXL: 36,
     fontWeightMedium: 600,
     h2: {
