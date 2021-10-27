@@ -14,9 +14,9 @@ const useStyles = makeStyles((theme) => {
       position: "relative",
       height: "100%",
       width: 425,
-      backgroundColor: "rgb(134,185,255)",
+      backgroundColor: theme.palette.primary.dark,
       background: `
-        linear-gradient(0deg, rgba(134,185,255,.85) 0%, rgba(58,141,255,.85) 100%),
+        ${theme.palette.blueGradient.main},
         url(${bgImage})
       `,
       backgroundSize: "100%",
@@ -40,19 +40,15 @@ const useStyles = makeStyles((theme) => {
         top: 260,
       },
       [smlScreen]: {
-        width: 240,
-      },
-      [xsScreen]: {
-        display: "none",
+        width: 160,
       },
     },
     sloganText: {
-      ...theme.typography.fontWeightMedium,
       color: "white",
       marginTop: theme.spacing(3),
-      fontSize: 26,
+      fontSize: theme.typography.fontSizeLg,
       [smlScreen]: {
-        fontSize: 20,
+        fontSize: theme.typography.fontSize,
       },
     },
     bubble: {

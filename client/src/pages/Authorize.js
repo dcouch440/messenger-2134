@@ -15,20 +15,15 @@ const Authorize = ({ user, withSignup }) => {
   if (user.id) {
     return <Redirect to="/home" />;
   }
-
-  const routeText = withSignup ? "/login" : "/register";
-  const sideText = `${
-    withSignup ? "Already have an account?" : "Don't have an account?"
-  }`;
-  const buttonText = `${withSignup ? "Login" : "Create account"}`;
-
   return (
     <Layout>
       <TopButtonContainer>
         <ChangeRouteButton
-          route={routeText}
-          sideText={sideText}
-          buttonText={buttonText}
+          route={withSignup ? "/login" : "/register"}
+          sideText={
+            withSignup ? "Already have an account?" : "Don't have an account?"
+          }
+          buttonText={withSignup ? "Login" : "Create account"}
           variant="contained"
         />
       </TopButtonContainer>

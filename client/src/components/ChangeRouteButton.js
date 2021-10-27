@@ -24,8 +24,7 @@ const useStyles = makeStyles((theme) => {
       },
     },
     sText: {
-      fontSize: 14,
-      color: theme.colors.lightGrey,
+      fontSize: theme.typography.fontSize,
       [xsScreen]: {
         fontSize: 10,
       },
@@ -34,16 +33,16 @@ const useStyles = makeStyles((theme) => {
       backgroundColor: "transparent",
       width: 170,
       height: 54,
-      fontSize: 14,
-      boxShadow: "0px 2px 12px rgba(74,106,149,0.2)",
+      fontSize: theme.typography.fontSize,
+      fontFamily: theme.typography.fontFamily,
+      boxShadow: `0px 2px 12px ${theme.palette.transparentBlue.main}`,
       borderRadius: 5,
-      color: theme.colors.lightBlue,
+      color: theme.palette.primary.main,
       "&:hover": {
-        backgroundColor: "#FFFFFF10",
+        backgroundColor: theme.palette.transparentWhite.main,
       },
       [smlScreen]: {
         width: 160,
-        fontSize: 12,
       },
       [xsScreen]: {
         boxShadow: "none",
@@ -51,11 +50,6 @@ const useStyles = makeStyles((theme) => {
         height: "fit-content",
         padding: 0,
       },
-    },
-    [xsScreen]: {
-      width: "100%",
-      marginTop: theme.spacing(2),
-      marginBottom: theme.spacing(2),
     },
   };
 });
@@ -78,7 +72,9 @@ const ChangeRouteButton = ({
 
   return (
     <Box className={`${classes.root} ${className ?? ""}`}>
-      <Typography className={classes.sText}>{sideText}</Typography>
+      <Typography color="secondary" className={classes.sText}>
+        {sideText}
+      </Typography>
       <Button
         className={classes.routeButton}
         variant={variant}

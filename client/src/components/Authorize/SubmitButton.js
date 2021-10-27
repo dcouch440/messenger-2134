@@ -1,4 +1,4 @@
-import { Button, Typography, makeStyles } from "@material-ui/core";
+import { Button, makeStyles } from "@material-ui/core";
 
 import PropTypes from "prop-types";
 import React from "react";
@@ -8,25 +8,20 @@ const useStyles = makeStyles((theme) => {
 
   return {
     root: {
-      backgroundColor: theme.colors.lightBlue,
       color: "white",
       width: 160,
       height: 56,
       borderRadius: 3,
       marginTop: theme.spacing(2),
       boxShadow: "none",
-      fontFamily: theme.fonts.monoserrat,
       "&:hover": {
         backgroundColor: "transparent",
-        color: theme.colors.lightBlue,
+        color: theme.palette.primary.main,
       },
       [xsScreen]: {
         width: "100%",
         marginTop: "0",
       },
-    },
-    text: {
-      fontSize: 16,
     },
   };
 });
@@ -40,13 +35,14 @@ const LoginButton = ({ text, onClick, type, variant, className }) => {
 
   return (
     <Button
-      className={`${classes.root} ${className}`}
+      className={`${classes.root} ${className ?? ""}`}
       onClick={onClick}
       type={type}
+      color="primary"
       variant={variant}
       size="large"
     >
-      <Typography className={classes.text}>{text}</Typography>
+      {text}
     </Button>
   );
 };

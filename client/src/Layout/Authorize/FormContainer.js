@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme) => {
     innerInputContainer: {
       display: "flex",
       flexDirection: "column",
-      height: "358px",
+      height: 358,
       justifyContent: "space-between",
       width: "fit-content",
       [lgScreen]: {

@@ -18,10 +18,8 @@ const useStyles = makeStyles((theme) => {
       },
     },
     slogan: {
-      ...theme.typography.fontWeightMedium,
-      color: theme.colors.lightGrey,
       paddingTop: theme.spacing(1),
-      fontSize: 12,
+      fontSize: theme.typography.fontSize,
       textAlign: "center",
     },
     blueBubble: {
@@ -45,7 +43,7 @@ const BubbleMobile = ({ className }) => {
         className={classes.blueBubble}
         alt="A blue chat bubble svg with three dots."
       />
-      <Typography className={classes.slogan}>
+      <Typography color="secondary" className={classes.slogan}>
         Converse with anyone with any language
       </Typography>
     </Box>

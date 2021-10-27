@@ -25,6 +25,7 @@ const useStyles = makeStyles((theme) => {
       [xsScreen]: {
         padding: 0,
         order: 2,
+        marginTop: theme.spacing(2),
       },
     },
   };

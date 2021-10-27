@@ -24,7 +24,6 @@ const useStyles = makeStyles((theme) => {
       },
       [xsScreen]: {
         width: "85vw",
-        marginBottom: theme.spacing(25),
         height: 56,
       },
     },
@@ -36,26 +35,26 @@ const useStyles = makeStyles((theme) => {
       width: "inherit",
       "& .MuiInputBase-input": {
         padding: "10px 5px",
-        fontSize: 14,
-        fontWeight: 600,
         borderBottomWidth: 2,
       },
       "& .MuiFormLabel-root": {
-        color: theme.colors.lightGrey,
+        color: theme.palette.secondary.main,
         paddingLeft: theme.spacing(0.5),
         paddingBottom: theme.spacing(1),
-        fontSize: 14,
+        fontSize: theme.typography.fontSize,
       },
     },
     forgotPassword: {
-      ...theme.typography.fontWeightMedium,
       position: "absolute",
       paddingBottom: theme.spacing(1),
       bottom: 0,
       right: theme.spacing(1),
-      fontSize: 12,
-      color: theme.colors.lightBlue,
+      fontSize: theme.typography.fontSize,
+      color: theme.palette.primary.main,
       fontWeight: 600,
+      "&:hover": {
+        cursor: "pointer",
+      },
     },
     formHelper: {
       fontSize: 10,

@@ -71,7 +71,7 @@ const Form = ({ register, login, withSignup }) => {
     });
   const classes = useStyles();
   const hasPasswordError = Boolean(passwordError);
-  const headerText = `${withSignup ? "Create an account." : "Welcome Back!"}`;
+  const headerText = withSignup ? "Create an account." : "Welcome Back!";
   const submitButtonText = withSignup ? "Create" : "Login";
 
   const handleChange = ({ target }) => {
@@ -82,7 +82,7 @@ const Form = ({ register, login, withSignup }) => {
     }));
   };
 
-  const handleRegister = (event) => {
+  const handleAuth = (event) => {
     event.preventDefault();
 
     if (!withSignup) {
@@ -99,7 +99,7 @@ const Form = ({ register, login, withSignup }) => {
   };
 
   return (
-    <form className={classes.form} onSubmit={handleRegister}>
+    <form className={classes.form} onSubmit={handleAuth}>
       <BubbleMobile />
       <Header className={classes.header} text={headerText} />
       <Box className={classes.inputBox}>
@@ -114,7 +114,7 @@ const Form = ({ register, login, withSignup }) => {
           value={username}
           required
         />
-        {withSignup && (
+        {withSignup ? (
           <Input
             className={classes.inputs}
             ariaLabel="e-mail address"
@@ -126,6 +126,8 @@ const Form = ({ register, login, withSignup }) => {
             value={email}
             required
           />
+        ) : (
+          <></>
         )}
         <Input
           className={classes.inputs}
@@ -143,7 +145,7 @@ const Form = ({ register, login, withSignup }) => {
           forgot={withSignup ? false : true}
           required
         />
-        {withSignup && (
+        {withSignup ? (
           <Input
             className={classes.inputs}
             ariaLabel="confirm password"
@@ -159,6 +161,8 @@ const Form = ({ register, login, withSignup }) => {
             value={confirmPassword}
             required
           />
+        ) : (
+          <></>
         )}
         <SubmitButton
           type="submit"
@@ -173,6 +177,8 @@ const Form = ({ register, login, withSignup }) => {
 
 Form.propTypes = {
   register: PropTypes.func.isRequired,
+  login: PropTypes.func.isRequired,
+  withSignup: PropTypes.bool,
 };
 
 const mapDispatchToProps = (dispatch) => ({
