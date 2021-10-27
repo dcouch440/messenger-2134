@@ -24,7 +24,6 @@ const Login = ({ user, login }) => {
       route="/register"
       sideText="Don't have an account?"
       buttonText="Create account"
-      variant="contained"
     />
   );
 

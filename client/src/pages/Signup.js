@@ -33,7 +33,6 @@ const Signup = ({ user, register }) => {
       route="/login"
       sideText="Already have an account?"
       buttonText="Login"
-      variant="contained"
     />
   );
 
