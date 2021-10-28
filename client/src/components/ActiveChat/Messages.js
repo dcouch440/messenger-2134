@@ -2,6 +2,10 @@ import { Message } from ".";
 import PropTypes from "prop-types";
 import React from "react";
 
+/**
+ * @description Messages component maps through an array of messages and finds the order for each.
+ */
+
 const Messages = ({ messages, userId, otherUser }) => {
   // CSS order of messages based on their content.
   const orderMessage = ({ text, attachments }) => {

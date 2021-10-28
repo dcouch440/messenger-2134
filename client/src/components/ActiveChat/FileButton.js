@@ -20,6 +20,10 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
+/**
+ * @description FileButton component displays a hidden input that captures input changes with a Icon for display.
+ */
+
 const FileButton = ({ onChange, className }) => {
   const classes = useStyles();
 
