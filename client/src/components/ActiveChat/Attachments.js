@@ -15,7 +15,6 @@ const useStyles = makeStyles((theme) => ({
     height: "auto",
     maxHeight: 100,
     maxWidth: 100,
-    marginBottom: theme.spacing(0.5),
     marginTop: theme.spacing(0.5),
   },
   otherUser: {
@@ -32,21 +31,22 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: 150,
     objectFit: "cover",
   },
-  space: {
-    width: 6,
-  },
 }));
 
-const Attachments = ({ attachments, order, isOtherUser }) => {
+const Attachments = ({
+  attachments,
+  order,
+  isOtherUser,
+  hasManyAttachments,
+}) => {
   const classes = useStyles({ order, isOtherUser });
-  const isMany = attachments.length > 1;
 
   const attachmentsCB = (url) => {
     return (
       <img
         className={`
         ${isOtherUser ? classes.otherUser : classes.user}
-        ${isMany ? classes.manyImages : classes.image}
+        ${hasManyAttachments ? classes.manyImages : classes.image}
         `}
         src={url}
         key={url}

@@ -4,16 +4,16 @@ import Attachments from "./Attachments";
 import PropTypes from "prop-types";
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
+import moment from "moment";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     display: ({ isOtherUser }) => (isOtherUser ? "flex" : "initial"),
-    marginTop: theme.spacing(1),
+    marginBottom: theme.spacing(1),
   },
   messageContainer: {
     display: "flex",
     flexDirection: "column",
-    maxWidth: "100%",
     alignItems: ({ isOtherUser }) => (isOtherUser ? "flex-start" : "flex-end"),
   },
   avatar: {
@@ -23,6 +23,15 @@ const useStyles = makeStyles((theme) => ({
     fontSize: 11,
     color: theme.palette.lightGrayishBlue.main,
     fontWeight: "bold",
+    // if date comes last add space.
+    marginTop: ({ date }) => (date === 3 ? theme.spacing(0.5) : 0),
+    marginBottom: ({ date, hasManyAttachments }) =>
+      date === 1 && hasManyAttachments
+        ? 0 /* if date comes first and many attachments are present, remove margin. Images need margin to stack. */
+        : /* if date comes first but many attachments are not present add margin, image top contains no margin */
+        date === 1
+        ? theme.spacing(0.5) /* add spacing */
+        : 0 /* unless bottom */,
     order: ({ date }) => date,
   },
   text: {
@@ -46,24 +55,23 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Message = ({
-  otherUser,
-  time,
-  text,
-  attachments,
-  messageOrder,
-  isOtherUser,
-}) => {
-  const classes = useStyles({ ...messageOrder, isOtherUser });
+const Message = ({ message, otherUser, messageOrder, isOtherUser }) => {
+  const { text, attachments, createdAt } = message;
+  const { username, photoUrl } = otherUser;
+  const hasManyAttachments = Boolean(attachments?.length > 1);
+  const classes = useStyles({
+    ...messageOrder,
+    isOtherUser,
+    hasManyAttachments,
+    hasAttachments: Boolean(attachments?.length),
+  });
+  const time = moment(createdAt).format("h:mm");
+
   return (
     <Box className={classes.root}>
       {isOtherUser ? (
         <Box>
-          <Avatar
-            alt={otherUser.username}
-            src={otherUser.photoUrl}
-            className={classes.avatar}
-          />
+          <Avatar alt={username} src={photoUrl} className={classes.avatar} />
         </Box>
       ) : (
         <></>
@@ -88,6 +96,7 @@ const Message = ({
             order={messageOrder.attachments}
             attachments={attachments}
             isOtherUser={isOtherUser}
+            hasManyAttachments={hasManyAttachments}
           />
         ) : (
           <></>
@@ -98,7 +107,6 @@ const Message = ({
 };
 
 Message.propTypes = {
-  attachments: PropTypes.arrayOf(PropTypes.string),
   isOtherUser: PropTypes.bool.isRequired,
   messageOrder: PropTypes.shape({
     attachments: PropTypes.number.isRequired,
@@ -109,8 +117,11 @@ Message.propTypes = {
     photoUrl: PropTypes.string.isRequired,
     username: PropTypes.string.isRequired,
   }),
-  text: PropTypes.string.isRequired,
-  time: PropTypes.any.isRequired,
+  message: PropTypes.shape({
+    text: PropTypes.string,
+    attachments: PropTypes.array,
+    createdAt: PropTypes.string.isRequired,
+  }),
 };
 
 export default Message;

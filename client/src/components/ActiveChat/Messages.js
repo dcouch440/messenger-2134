@@ -1,9 +1,9 @@
 import { Message } from ".";
 import PropTypes from "prop-types";
 import React from "react";
-import moment from "moment";
 
 const Messages = ({ messages, userId, otherUser }) => {
+  // CSS order of messages based on their content.
   const orderMessage = ({ text, attachments }) => {
     const hasTextAndManyImages = Boolean(text) && attachments?.length > 1;
     if (hasTextAndManyImages) {
@@ -24,16 +24,13 @@ const Messages = ({ messages, userId, otherUser }) => {
 
   return messages.map((message) => {
     const { text, attachments } = message;
-    const isOtherUser = message.senderId !== userId;
-    const time = moment(message.createdAt).format("h:mm");
     const messageOrder = orderMessage({ text, attachments });
+    const isOtherUser = message.senderId !== userId;
 
     return (
       <Message
         key={message.id}
-        attachments={attachments}
-        text={text}
-        time={time}
+        message={message}
         messageOrder={messageOrder}
         otherUser={otherUser}
         isOtherUser={isOtherUser}
