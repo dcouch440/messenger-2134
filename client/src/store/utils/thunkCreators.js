@@ -93,64 +93,56 @@ const sendMessage = (data, body) => {
   });
 };
 
-// message format to send to postgres: {recipientId, text, conversationId, sender, attachments[]}
+// message format to send to postgres: {recipientId, text, conversationId, sender, attachments}
 // conversationId will be set to null if its a brand new conversation
 export const postMessage = (body) => async (dispatch) => {
   try {
-    const { attachments, ...messageData } = body;
+    const { attachments, ...message } = body;
 
     // if any attachments are present, send them to cloudinary and return the url.
     const imageRequests = attachments.map(async (attachment) => {
       try {
-        const url = `https://api.cloudinary.com/v1_1/dyc2vfni0/image/upload`;
-        const formData = new FormData();
-
-        formData.append("file", attachment);
-        formData.append("upload_preset", "i014dxt6");
-
-        const response = await fetch(url, {
+        // cloudinary will not accept with x-access-token present.
+        const { data } = await axios({
           method: "POST",
-          body: formData,
+          url: "https://api.cloudinary.com/v1_1/dyc2vfni0/image/upload",
+          transformRequest: [
+            (data, headers) => {
+              delete headers["x-access-token"];
+              return data;
+            },
+          ],
+          data: attachment,
         });
 
-        // if response is not ok, return null to be filtered out later.
-        if (!response.ok) {
-          console.log({
-            message: response.statusText,
-            status: response.ok,
-          });
-          return null;
-        }
-
-        const { secure_url } = await response.json();
-
-        return secure_url;
+        return data.secure_url;
       } catch (error) {
         console.error(error);
       }
     });
 
-    const imageUrls = await Promise.all(imageRequests);
-
     // removing non url's values to prevent server store / reject of values we dont want. the successful images can still be sent.
-    const validUrls = imageUrls.filter((url) => url !== undefined);
+    const filterBadRequests = (arr) =>
+      arr.filter((url) => typeof url === "string");
+
+    const imageUrls = await Promise.all(imageRequests).then(filterBadRequests);
 
     // exit if nothing was successful.
-    if (!messageData.text && !validUrls.length) {
-      throw new Error("No content to send");
+    if (!message.text && !imageUrls.length) {
+      throw new Error("No content to send, all images failed to send.");
     }
 
+    // attaching successful urls
     const bodyWithAttachments = {
-      ...messageData,
+      ...message,
       attachments: imageUrls,
     };
 
+    // saving message to database.
     const messageResponse = await saveMessage(bodyWithAttachments);
 
-    if (!messageData.conversationId) {
-      dispatch(
-        addConversation(messageData.recipientId, messageResponse.message)
-      );
+    if (!message.conversationId) {
+      dispatch(addConversation(message.recipientId, messageResponse.message));
     } else {
       dispatch(setNewMessage(messageResponse.message));
     }
