@@ -1,4 +1,4 @@
-export { default as SenderBubble } from "./SenderBubble";
+export { default as Message } from "./Message";
 export { default as OtherUserBubble } from "./OtherUserBubble";
 export { default as ActiveChat } from "./ActiveChat";
 export { default as Input } from "./Input";

@@ -9,6 +9,10 @@ const useStyles = makeStyles(() => ({
   fab: {
     outline: "none",
     boxShadow: "none",
+    background: "none",
+    "&:hover": {
+      background: "none",
+    },
   },
   icon: {
     width: "60%",
@@ -35,7 +39,7 @@ const FileButton = ({ onChange, className }) => {
         component="span"
         aria-label="add"
       >
-        <FileCopyOutlined />
+        <FileCopyOutlined color="secondary" />
       </Fab>
     </label>
   );

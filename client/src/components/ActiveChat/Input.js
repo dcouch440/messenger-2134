@@ -43,22 +43,28 @@ const Input = (props) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     // add sender user info if posting to a brand new convo, so that the other user will have access to username, profile pic, etc.
-    const reqBody = {
-      text: event.target.text.value,
+    const bodyWithAttachments = {
+      text,
       recipientId: otherUser.id,
       conversationId,
       sender: conversationId ? null : user,
       attachments,
     };
 
-    await postMessage(reqBody);
+    await postMessage(bodyWithAttachments);
     setText("");
     setAttachments([]);
   };
 
   const handleAddFile = ({ target }) => {
     const { files } = target;
-    setAttachments((prev) => [...prev, ...files]);
+    const formDataFiles = files.map((file) => {
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("upload_preset", "i014dxt6");
+      return formData;
+    });
+    setAttachments((prev) => [...prev, ...formDataFiles]);
   };
 
   return (

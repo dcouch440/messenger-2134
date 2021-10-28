@@ -8,29 +8,53 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexWrap: "wrap",
     order: ({ order }) => order,
+    justifyContent: ({ isOtherUser }) =>
+      isOtherUser ? "flex-start" : "flex-end",
+  },
+  manyImages: {
+    height: "auto",
+    maxHeight: 100,
+    maxWidth: 100,
     marginBottom: theme.spacing(0.5),
+    marginTop: theme.spacing(0.5),
+  },
+  otherUser: {
+    marginRight: theme.spacing(0.5),
+    borderRadius: "7px 7px 7px 0",
+  },
+  user: {
+    marginLeft: theme.spacing(0.5),
+    borderRadius: "7px 7px 0 7px",
   },
   image: {
-    height: ({ isMany }) => (isMany ? "auto" : 140),
-    maxHeight: ({ isMany }) => (isMany ? 80 : 140),
-    maxWidth: ({ isMany }) => (isMany ? 100 : 140),
-    marginLeft: ({ isMany }) => (isMany ? theme.spacing(0.5) : 0),
-    borderRadius: "7px 7px 0 7px",
+    height: 140,
+    maxHeight: 150,
+    maxWidth: 150,
     objectFit: "cover",
+  },
+  space: {
+    width: 6,
   },
 }));
 
-const Attachments = ({ attachments, order }) => {
-  const classes = useStyles({
-    order,
-    isMany: attachments.length > 1,
-  });
+const Attachments = ({ attachments, order, isOtherUser }) => {
+  const classes = useStyles({ order, isOtherUser });
+  const isMany = attachments.length > 1;
 
-  const attachmentCB = (attachment, key) => (
-    <img className={classes.image} src={attachment} key={key} />
-  );
+  const attachmentsCB = (url) => {
+    return (
+      <img
+        className={`
+        ${isOtherUser ? classes.otherUser : classes.user}
+        ${isMany ? classes.manyImages : classes.image}
+        `}
+        src={url}
+        key={url}
+      />
+    );
+  };
 
-  return <Box className={classes.root}>{attachments?.map(attachmentCB)}</Box>;
+  return <Box className={classes.root}>{attachments?.map(attachmentsCB)}</Box>;
 };
 
 Attachments.propTypes = {
