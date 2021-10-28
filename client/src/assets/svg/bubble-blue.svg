@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100%" height="100%" viewBox="0 0 68 67" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+    <g transform="matrix(1,0,0,1,0.0641281,-0.435874)">
+        <g id="Shape" transform="matrix(1,0,0,1,0,0.5)">
+            <path d="M57.169,9.67C50.837,3.433 42.436,0 33.483,0C24.53,0 16.13,3.433 9.798,9.67C-2.442,21.726 -3.292,41.023 7.687,54.042C6.61,56.177 4.882,58.661 2.318,59.902C1.085,60.502 0.391,61.8 0.604,63.14C0.816,64.479 1.865,65.526 3.225,65.735C3.862,65.833 4.769,65.93 5.874,65.93C8.834,65.93 13.197,65.246 17.66,62.079C22.632,64.716 28.072,66 33.469,66C42.139,66 50.723,62.693 57.183,56.33C63.515,50.093 67,41.819 67,33C67,24.181 63.501,15.907 57.169,9.67ZM54.463,53.665C44.901,63.084 30.098,64.954 18.453,58.214C17.688,57.767 16.739,57.907 16.13,58.507C16.073,58.535 16.016,58.577 15.974,58.619C12.135,61.549 8.367,62.163 5.874,62.163L5.859,62.163C8.735,60.098 10.548,57.028 11.611,54.642C11.781,54.237 11.809,53.819 11.71,53.428C11.668,53.051 11.512,52.674 11.243,52.367C0.873,40.828 1.411,23.247 12.489,12.335C24.063,0.935 42.889,0.935 54.449,12.335C66.037,23.735 66.037,42.265 54.463,53.665Z" style="fill:url(#_Linear1);fill-rule:nonzero;stroke:rgb(176,176,176);stroke-width:0.13px;"/>
+        </g>
+        <g id="Oval" transform="matrix(1,0,0,1,31,31.5)">
+            <path d="M2.5,5C3.881,5 5,3.881 5,2.5C5,1.119 3.881,0 2.5,0C1.119,0 0,1.119 0,2.5C0,3.881 1.119,5 2.5,5Z" style="fill:url(#_Linear2);fill-rule:nonzero;stroke:rgb(176,176,176);stroke-width:0.13px;"/>
+        </g>
+        <g id="Oval1" serif:id="Oval" transform="matrix(1,0,0,1,43,31.5)">
+            <path d="M2.5,5C3.881,5 5,3.881 5,2.5C5,1.119 3.881,0 2.5,0C1.119,0 0,1.119 0,2.5C0,3.881 1.119,5 2.5,5Z" style="fill:url(#_Linear3);fill-rule:nonzero;stroke:rgb(176,176,176);stroke-width:0.13px;"/>
+        </g>
+        <g id="Oval2" serif:id="Oval" transform="matrix(1,0,0,1,19,31.5)">
+            <path d="M2.5,5C3.881,5 5,3.881 5,2.5C5,1.119 3.881,0 2.5,0C1.119,0 0,1.119 0,2.5C0,3.881 1.119,5 2.5,5Z" style="fill:url(#_Linear4);fill-rule:nonzero;stroke:rgb(176,176,176);stroke-width:0.13px;"/>
+        </g>
+    </g>
+    <defs>
+        <linearGradient id="_Linear1" x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(4.07195e-15,66.5,-65.5075,4.01118e-15,33.5,0)"><stop offset="0" style="stop-color:rgb(58,141,255);stop-opacity:1"/><stop offset="0.45" style="stop-color:rgb(80,154,255);stop-opacity:1"/><stop offset="1" style="stop-color:rgb(134,185,255);stop-opacity:1"/></linearGradient>
+        <linearGradient id="_Linear2" x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(4.07195e-15,66.5,-65.5075,4.01118e-15,2.5,-31)"><stop offset="0" style="stop-color:rgb(58,141,255);stop-opacity:1"/><stop offset="0.45" style="stop-color:rgb(80,154,255);stop-opacity:1"/><stop offset="1" style="stop-color:rgb(134,185,255);stop-opacity:1"/></linearGradient>
+        <linearGradient id="_Linear3" x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(4.07195e-15,66.5,-65.5075,4.01118e-15,-9.5,-31)"><stop offset="0" style="stop-color:rgb(58,141,255);stop-opacity:1"/><stop offset="0.45" style="stop-color:rgb(80,154,255);stop-opacity:1"/><stop offset="1" style="stop-color:rgb(134,185,255);stop-opacity:1"/></linearGradient>
+        <linearGradient id="_Linear4" x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(4.07195e-15,66.5,-65.5075,4.01118e-15,14.5,-31)"><stop offset="0" style="stop-color:rgb(58,141,255);stop-opacity:1"/><stop offset="0.45" style="stop-color:rgb(80,154,255);stop-opacity:1"/><stop offset="1" style="stop-color:rgb(134,185,255);stop-opacity:1"/></linearGradient>
+    </defs>
+</svg>
