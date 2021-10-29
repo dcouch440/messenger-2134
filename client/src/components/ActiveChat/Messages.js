@@ -1,9 +1,14 @@
+import { Box } from "@material-ui/core";
 import { Message } from ".";
 import PropTypes from "prop-types";
 import React from "react";
 
 /**
  * @description Messages component maps through an array of messages and finds the order for each.
+ * if there is an image and text the order is time, image text.
+ * if there are images and text the order is text, images, date.
+ * if there is only an image the order is date, image.
+ * if there is only text the order is date, text.
  */
 
 const Messages = ({ messages, userId, otherUser }) => {
@@ -26,21 +31,25 @@ const Messages = ({ messages, userId, otherUser }) => {
     };
   };
 
-  return messages.map((message) => {
-    const { text, attachments } = message;
-    const messageOrder = orderMessage({ text, attachments });
-    const isOtherUser = message.senderId !== userId;
+  return (
+    <Box>
+      {messages.map((message) => {
+        const { text, attachments } = message;
+        const messageOrder = orderMessage({ text, attachments });
+        const isOtherUser = message.senderId !== userId;
 
-    return (
-      <Message
-        key={message.id}
-        message={message}
-        messageOrder={messageOrder}
-        otherUser={otherUser}
-        isOtherUser={isOtherUser}
-      />
-    );
-  });
+        return (
+          <Message
+            key={message.id}
+            message={message}
+            messageOrder={messageOrder}
+            otherUser={otherUser}
+            isOtherUser={isOtherUser}
+          />
+        );
+      })}
+    </Box>
+  );
 };
 
 Messages.propTypes = {

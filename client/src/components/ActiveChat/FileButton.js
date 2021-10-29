@@ -4,7 +4,6 @@ import { FileCopyOutlined } from "@material-ui/icons";
 import PropTypes from "prop-types";
 import React from "react";
 
-// #C9D4E2
 const useStyles = makeStyles(() => ({
   fab: {
     outline: "none",
@@ -18,6 +17,9 @@ const useStyles = makeStyles(() => ({
     width: "60%",
     height: "60%",
   },
+  input: {
+    display: "none",
+  },
 }));
 
 /**
@@ -30,7 +32,7 @@ const FileButton = ({ onChange, className }) => {
   return (
     <label htmlFor="upload-photo" className={className}>
       <input
-        style={{ display: "none" }}
+        className={classes.input}
         id="upload-photo"
         name="upload-photo"
         type="file"

@@ -8,10 +8,11 @@ import moment from "moment";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    display: ({ isOtherUser }) => (isOtherUser ? "flex" : "initial"),
+    display: ({ isOtherUser }) => (isOtherUser ? "flex" : "block"),
     marginBottom: theme.spacing(1),
   },
   messageContainer: {
+    marginBottom: theme.spacing(1),
     display: "flex",
     flexDirection: "column",
     alignItems: ({ isOtherUser }) => (isOtherUser ? "flex-start" : "flex-end"),
@@ -20,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
     marginRight: theme.spacing(0.5),
   },
   date: {
-    fontSize: 11,
+    fontSize: theme.typography.fontSizeSm,
     color: theme.palette.lightGrayishBlue.main,
     fontWeight: "bold",
     // if date comes last add space.
@@ -57,38 +58,33 @@ const useStyles = makeStyles((theme) => ({
 
 /**
  * @description Message component displays user messages based on their contents.
- * if there is an image and text the order is time, image text.
- * if there are images and text the order is text, images, date.
- * if there is only an image the order is date, image.
- * if there is only text the order is date, text.
  */
 
 const Message = ({ message, otherUser, messageOrder, isOtherUser }) => {
   const { text, attachments, createdAt } = message;
   const { username, photoUrl } = otherUser;
+  const hasAttachments = Boolean(attachments?.length);
   const hasManyAttachments = Boolean(attachments?.length > 1);
   const classes = useStyles({
     ...messageOrder,
     isOtherUser,
     hasManyAttachments,
-    hasAttachments: Boolean(attachments?.length),
+    hasAttachments,
   });
   const time = moment(createdAt).format("h:mm");
 
   return (
     <Box className={classes.root}>
-      {isOtherUser ? (
+      {isOtherUser && (
         <Box>
           <Avatar alt={username} src={photoUrl} className={classes.avatar} />
         </Box>
-      ) : (
-        <></>
       )}
       <Box className={classes.messageContainer}>
         <Typography className={classes.date}>
           {isOtherUser && otherUser.username} {time}
         </Typography>
-        {text ? (
+        {text && (
           <Box
             className={`${
               isOtherUser ? classes.otherUserBubble : classes.userBubble
@@ -96,18 +92,14 @@ const Message = ({ message, otherUser, messageOrder, isOtherUser }) => {
           >
             <Typography className={classes.text}>{text}</Typography>
           </Box>
-        ) : (
-          <></>
         )}
-        {attachments ? (
+        {hasAttachments && (
           <Attachments
             order={messageOrder.attachments}
             attachments={attachments}
             isOtherUser={isOtherUser}
             hasManyAttachments={hasManyAttachments}
           />
-        ) : (
-          <></>
         )}
       </Box>
     </Box>
