@@ -12,7 +12,6 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: theme.spacing(1),
   },
   messageContainer: {
-    marginBottom: theme.spacing(1),
     display: "flex",
     flexDirection: "column",
     alignItems: ({ isOtherUser }) => (isOtherUser ? "flex-start" : "flex-end"),
@@ -58,6 +57,10 @@ const useStyles = makeStyles((theme) => ({
 
 /**
  * @description Message component displays user messages based on their contents.
+ * if there is an image and text the order is time, image text.
+ * if there are images and text the order is text, images, date.
+ * if there is only an image the order is date, image.
+ * if there is only text the order is date, text.
  */
 
 const Message = ({ message, otherUser, messageOrder, isOtherUser }) => {
