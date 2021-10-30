@@ -3,6 +3,7 @@ import { createMuiTheme } from "@material-ui/core";
 export const theme = createMuiTheme({
   typography: {
     fontFamily: "Open Sans, sans-serif",
+    fontSizeSm: 11,
     fontSize: 14,
     fontSizeLg: 26,
     fontSizeXL: 36,
@@ -33,6 +34,13 @@ export const theme = createMuiTheme({
     blueGradient: {
       main: "linear-gradient(0deg, rgba(134,185,255,.85) 0%, rgba(58,141,255,.85) 100%)",
     },
+    darkBlueGradient: {
+      main: "linear-gradient(225deg, #6CC1FF 0%, #3A8DFF 100%)",
+    },
+    dimGrey: { main: "#F4F6FA" },
+    white: { main: "#FFFFFF" },
+    nepal: { main: "#91A3C0" },
+    lightGrayishBlue: { main: "#BECCE2" },
   },
   spacing: 12,
 });

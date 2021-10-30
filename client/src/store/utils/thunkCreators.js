@@ -89,22 +89,65 @@ const sendMessage = (data, body) => {
     message: data.message,
     recipientId: body.recipientId,
     sender: data.sender,
+    attachments: data.attachments,
   });
 };
 
-// message format to send: {recipientId, text, conversationId}
+// message format to send to postgres: {recipientId, text, conversationId, sender, attachments}
 // conversationId will be set to null if its a brand new conversation
 export const postMessage = (body) => async (dispatch) => {
   try {
-    const data = await saveMessage(body);
+    const { attachments, ...message } = body;
 
-    if (!body.conversationId) {
-      dispatch(addConversation(body.recipientId, data.message));
-    } else {
-      dispatch(setNewMessage(data.message));
+    // if any attachments are present, send them to cloudinary and return the url.
+    const imageRequests = attachments.map(async (attachment) => {
+      try {
+        // cloudinary will not accept with x-access-token present.
+        const { data } = await axios({
+          method: "POST",
+          url: "https://api.cloudinary.com/v1_1/dyc2vfni0/image/upload",
+          transformRequest: [
+            (data, headers) => {
+              delete headers["x-access-token"];
+              return data;
+            },
+          ],
+          data: attachment,
+        });
+
+        return data.secure_url;
+      } catch (error) {
+        console.error(error);
+      }
+    });
+
+    // removing non url's values to prevent server store / reject of values we dont want. the successful images can still be sent.
+    const filterBadRequests = (arr) =>
+      arr.filter((url) => typeof url === "string");
+
+    const imageUrls = await Promise.all(imageRequests).then(filterBadRequests);
+
+    // exit if nothing was successful.
+    if (!message.text && !imageUrls.length) {
+      throw new Error("No content to send, all images failed to send.");
     }
 
-    sendMessage(data, body);
+    // attaching successful urls
+    const bodyWithAttachments = {
+      ...message,
+      attachments: imageUrls,
+    };
+
+    // saving message to database.
+    const messageResponse = await saveMessage(bodyWithAttachments);
+
+    if (!message.conversationId) {
+      dispatch(addConversation(message.recipientId, messageResponse.message));
+    } else {
+      dispatch(setNewMessage(messageResponse.message));
+    }
+
+    sendMessage(messageResponse, bodyWithAttachments);
   } catch (error) {
     console.error(error);
   }
